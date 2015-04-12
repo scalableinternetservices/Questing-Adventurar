@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412062414) do
+ActiveRecord::Schema.define(version: 20150412080844) do
 
   create_table "PendingAdventurer", id: false, force: :cascade do |t|
     t.integer "QuestID",      limit: 4, null: false
@@ -57,6 +57,11 @@ ActiveRecord::Schema.define(version: 20150412062414) do
   end
 
   add_index "userphonenumber", ["UserID"], name: "userphonenumber_ibfk_1", using: :btree
+
+  create_table "user_phone_numbers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   add_foreign_key "PendingAdventurer", "Quest", column: "QuestID", primary_key: "QuestID", name: "pendingadventurer_ibfk_1", on_update: :cascade, on_delete: :cascade
   add_foreign_key "UserAddress", "User", column: "UserID", primary_key: "UserID", name: "useraddress_ibfk_1", on_update: :cascade, on_delete: :cascade

@@ -7,5 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # encoding: utf-8
-User.delete_all
-User.create(UserID:123, Username: "steve", Email: "steve@steve.com", Password: "steve123")
+User.create(UserID: 123, Username: "steve", Email: "steve@steve.com", Password: "steve123")
+UserPhoneNumber.create(UserID: 123, PhoneNumber: 1234)
