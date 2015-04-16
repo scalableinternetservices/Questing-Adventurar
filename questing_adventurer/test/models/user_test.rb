@@ -29,5 +29,4 @@ class UserTest < ActiveSupport::TestCase
   	assert tq[0].title == 'Milk and Honey'
   end
 
-
 end

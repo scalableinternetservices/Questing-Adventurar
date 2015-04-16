@@ -17,3 +17,10 @@ albert:
   country: United States of America
   state: California
   zip_code: 90025
+
+vikwan:
+  user: vikwan
+  address: 102 Gayley Avenue
+  country: United States of America
+  state: California
+  zip_code: 90024
