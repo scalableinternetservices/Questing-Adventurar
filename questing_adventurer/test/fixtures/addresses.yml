@@ -5,10 +5,15 @@
 # below each fixture, per the syntax in the comments below
 #
 ryan:
-  email: ryan@ryan.com
-  encrypted_password: <%= User.new.send(:password_digest, 'ryandai') %>
+  user: ryan
+  address: 100 Gayley Avenue
+  country: United States of America
+  state: California
+  zip_code: 90024
 
 albert:
-  email: albert@albert.com
-  encrypted_password: <%= User.new.send(:password_digest, 'albertwong') %>
-
+  user: albert
+  address: 101 Gayley Avenue
+  country: United States of America
+  state: California
+  zip_code: 90025

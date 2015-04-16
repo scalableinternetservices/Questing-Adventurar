@@ -5,10 +5,17 @@
 # below each fixture, per the syntax in the comments below
 #
 ryan:
-  email: ryan@ryan.com
-  encrypted_password: <%= User.new.send(:password_digest, 'ryandai') %>
+  user: ryan
+  first_name: Ryan
+  last_name: Dai
+  gender: Male
+  questgiver_rating: 3.0
+  adventurer_rating: 3.0
 
 albert:
-  email: albert@albert.com
-  encrypted_password: <%= User.new.send(:password_digest, 'albertwong') %>
-
+  user: albert
+  first_name: Albert
+  last_name: Wong
+  gender: Male
+  questgiver_rating: 2.9
+  adventurer_rating: 3.1

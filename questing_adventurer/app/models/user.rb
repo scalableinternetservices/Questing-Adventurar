@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   # Quest information.
   has_many :given_quests, class_name: 'Quest', foreign_key: :questgiver_id
   has_many :taken_quests, class_name: 'Quest', foreign_key: :adventurer_id
+
+  has_many :pendings
   has_many :pending_quests, through: :pendings, class_name: 'Quest', source: :quest
 
 end
