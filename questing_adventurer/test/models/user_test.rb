@@ -21,11 +21,11 @@ class UserTest < ActiveSupport::TestCase
   test "quest associations defined correctly" do
   	albert = users(:albert)
 
-  	gq = albert.given_quests
+  	gq = albert.quests_posted
   	assert gq[0].title == 'Cereal Killer'
   	assert gq[0].pending_adventurers[0] == users(:ryan)
 
-  	tq = albert.taken_quests
+  	tq = albert.quests_accepted
   	assert tq[0].title == 'Milk and Honey'
   end
 
