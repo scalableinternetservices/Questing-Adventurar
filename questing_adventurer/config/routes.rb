@@ -1,13 +1,23 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
   get 'quest_posting/index'
   resources :quests
+=======
+  get 'quest/index'
+  resources :quests
+
+>>>>>>> rails_native_models
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+<<<<<<< HEAD
   root 'quest_posting#index'
+=======
+  root 'quest#index'
+>>>>>>> rails_native_models
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

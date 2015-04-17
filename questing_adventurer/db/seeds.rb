@@ -5,9 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+<<<<<<< HEAD
 
   user = User.new(
       :email                 => "admin@xxxxx.xxx",
+=======
+Quest.delete_all
+User.delete_all
+  user = User.new(
+      :email                 => "rydy@qa.com",
+>>>>>>> rails_native_models
       :password              => "12345678",
       :password_confirmation => "12345678"
   )
@@ -16,9 +23,33 @@
 Quest.create(
 	questgiver: user,
 	  adventurer: user,
+<<<<<<< HEAD
 	  title: 'Milk and Honey',
 	  price: 10.00,
 	  description: 'Please get me milk!',
+=======
+	  title: 'Q1',
+	  price: 10.00,
+	  description: 'Give me a Quest!',
+	  post_time: 20150412110000,
+	  expiration_time: 20150413210000
+	)
+Quest.create(
+	questgiver: user,
+	  adventurer: user,
+	  title: 'Q2',
+	  price: 10.00,
+	  description: 'Quest accepted!',
+	  post_time: 20150412110000,
+	  expiration_time: 20150413210000
+	)
+Quest.create(
+	questgiver: user,
+	  adventurer: user,
+	  title: 'Q3',
+	  price: 10.00,
+	  description: 'Quest...failed...',
+>>>>>>> rails_native_models
 	  post_time: 20150412110000,
 	  expiration_time: 20150413210000
 	)
