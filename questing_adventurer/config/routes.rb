@@ -1,14 +1,10 @@
 Rails.application.routes.draw do
-  get 'quest/index'
-  resources :quests
-
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root 'quest#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
