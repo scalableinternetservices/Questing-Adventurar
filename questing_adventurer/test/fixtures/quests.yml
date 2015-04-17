@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+milk:
+  questgiver: ryan
+  adventurer: albert
+  title: Milk and Honey
+  price: 10.00
+  description: Please get me milk!
+  post_time: 2015-04-12 11:00:00
+  expiration_time: 2015-04-13 21:00:00
+
+cereal:
+  questgiver: albert
+  adventurer:
+  title: Cereal Killer
+  price: 13.00
+  description: Cheerios please!
+  post_time: 2015-04-12 11:30:00
+  expiration_time: 2015-04-13 21:00:00

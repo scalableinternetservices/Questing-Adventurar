@@ -1,0 +1,26 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+ryan:
+  user: ryan
+  address: 100 Gayley Avenue
+  country: United States of America
+  state: California
+  zip_code: 90024
+
+albert:
+  user: albert
+  address: 101 Gayley Avenue
+  country: United States of America
+  state: California
+  zip_code: 90025
+
+vikwan:
+  user: vikwan
+  address: 102 Gayley Avenue
+  country: United States of America
+  state: California
+  zip_code: 90024
