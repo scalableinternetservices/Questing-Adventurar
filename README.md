@@ -1,3 +1,4 @@
+![Group Photo](group.png)
 # RYDY
 
 - Pivotal: https://www.pivotaltracker.com/n/projects/1321146
