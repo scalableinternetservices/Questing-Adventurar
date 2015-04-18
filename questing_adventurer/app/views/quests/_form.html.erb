@@ -1,0 +1,45 @@
+<%= form_for(@quest) do |f| %>
+  <% if @quest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@quest.errors.count, "error") %> prohibited this quest from being saved:</h2>
+
+      <ul>
+      <% @quest.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :questgiver_id %><br>
+    <%= f.text_field :questgiver_id %>
+  </div>
+  <div class="field">
+    <%= f.label :adventurer_id %><br>
+    <%= f.text_field :adventurer_id %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :post_time %><br>
+    <%= f.datetime_select :post_time %>
+  </div>
+  <div class="field">
+    <%= f.label :expiration_time %><br>
+    <%= f.datetime_select :expiration_time %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
