@@ -21,3 +21,12 @@ cereal:
   description: Cheerios please!
   post_time: 2015-04-12 11:30:00
   expiration_time: 2015-04-13 21:00:00
+
+one:
+  questgiver: ryan
+  adventurer: albert
+  title: Milk and Honey
+  price: 10.00
+  description: Please get me milk!
+  post_time: 2015-04-12 11:00:00
+  expiration_time: 2015-04-13 21:00:00
