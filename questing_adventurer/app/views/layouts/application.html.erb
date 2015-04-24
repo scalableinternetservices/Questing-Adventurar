@@ -23,24 +23,20 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="nav navbar-nav">
-        <li class="active"><%= link_to "Home", home_path, :class => 'navbar-link'%></li>
+        <li class="active"><%= link_to "Home", root_path, :class => 'navbar-link'%></li>
         <li><%= link_to "Quest Listings", listing_path, :class => 'navbar-link'  %></li>
         <li><%= link_to 'Post A Quest', new_quest_path, :class => 'navbar-link' %></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
-        <li>
-        <% if user_signed_in? %>
+        <li><% if user_signed_in? %>
           <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
         </li>
-        <li>
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+        <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
         </li>
         <% else %>
-        <li>
-          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %>
+        <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %>
         </li>
-        <li>
-          <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+        <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link' %>
         </li>
         <% end %>
       </ul>
@@ -50,10 +46,6 @@
 <% if user_signed_in? %>
       <p class="text-right" id="Login"> Logged in as <strong><%= current_user.email %></strong>. </p>
 <% end %>
-
 <%= yield %>
-
-
-
 </body>
 </html>
