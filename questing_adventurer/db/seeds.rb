@@ -70,11 +70,6 @@ Quest.create(
 	  expiration_time: 20150413210000,
 	)
 
-pending1 = Pending.create(
-	user_id: user.id,
-	quest_id: q1.id
-	)
-
 pending2 = Pending.create(
 	user_id: user2.id,
 	quest_id: q1.id
