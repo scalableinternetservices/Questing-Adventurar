@@ -24,12 +24,7 @@ class PendingsController < ApplicationController
   # POST /pendings
   # POST /pendings.json
   def create
-    # @pending = Pending.new(pending_params)
-    # quest = Quest.find(params[:quest_id])
-    @pending = Pending.create(
-    	user_id: :user,
-    	quest_id: :quest
-    	)
+    @pending = Pending.new(pending_params)
 
     respond_to do |format|
       if @pending.save
@@ -40,7 +35,6 @@ class PendingsController < ApplicationController
         format.json { render json: @pending.errors, status: :unprocessable_entity }
       end
     end
-    
   end
 
   # PATCH/PUT /pendings/1
@@ -75,6 +69,6 @@ class PendingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pending_params
-      params.require(:pending).permit(:quest_id_id, :user_id_id)
+      params.require(:pending).permit(:quest_id, :user_id)
     end
 end

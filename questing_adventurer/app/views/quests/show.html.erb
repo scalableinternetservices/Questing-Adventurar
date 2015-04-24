@@ -45,8 +45,8 @@
   <% end %>
 </p>
 
-<!-- <%= button_to 'I want the Quest!!', pendings_path(user_id: current_user, quest_id: @quest.id) %> -->
-<td><%= button_to 'I want the Quest!!', {:controller => "pendings", :action => "create", :quest => @quest, :user=> current_user, :method=>:post  %></td>
+<%= button_to 'I want the Quest!!', pendings_path(pending: {quest_id: @quest.id, user_id: current_user.id}) %>
+
 
 
 <%= link_to 'Edit', edit_quest_path(@quest) %> |

@@ -18,7 +18,7 @@ class PendingsControllerTest < ActionController::TestCase
 
   test "should create pending" do
     assert_difference('Pending.count') do
-      post :create, pending: { quest_id_id: @pending.quest_id_id, user_id_id: @pending.user_id_id }
+      post :create, pending: { quest_id: @pending.quest_id, user_id: @pending.user_id }
     end
 
     assert_redirected_to pending_path(assigns(:pending))
@@ -35,7 +35,7 @@ class PendingsControllerTest < ActionController::TestCase
   end
 
   test "should update pending" do
-    patch :update, id: @pending, pending: { quest_id_id: @pending.quest_id_id, user_id_id: @pending.user_id_id }
+    patch :update, id: @pending, pending: { quest_id: @pending.quest_id, user_id: @pending.user_id }
     assert_redirected_to pending_path(assigns(:pending))
   end
 

@@ -14,8 +14,8 @@
   <tbody>
     <% @pendings.each do |pending| %>
       <tr>
-        <td><%= pending.quest_id %></td>
-        <td><%= pending.user_id %></td>
+        <td><%= pending.quest %></td>
+        <td><%= pending.user %></td>
         <td><%= link_to 'Show', pending %></td>
         <td><%= link_to 'Edit', edit_pending_path(pending) %></td>
         <td><%= link_to 'Destroy', pending, method: :delete, data: { confirm: 'Are you sure?' } %></td>
