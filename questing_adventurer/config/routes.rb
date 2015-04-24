@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :quests
   resources :pendings
-  resources :users
   devise_for :users
 
   root 'quests#home'
