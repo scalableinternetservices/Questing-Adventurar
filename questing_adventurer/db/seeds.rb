@@ -6,8 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Pending.delete_all
 Quest.delete_all
 User.delete_all
+
   user = User.new(
       :email                 => "rydy@qa.com",
       :password              => "12345678",
@@ -15,7 +17,32 @@ User.delete_all
   )
   # user.skip_confirmation!
   user.save!
-Quest.create(
+
+  user2 = User.new(
+      :email                 => "albur@qa.com",
+      :password              => "12345678",
+      :password_confirmation => "12345678"
+  )
+  # user.skip_confirmation!
+  user2.save!
+
+    user3 = User.new(
+      :email                 => "vikwan@qa.com",
+      :password              => "12345678",
+      :password_confirmation => "12345678"
+  )
+  # user.skip_confirmation!
+  user3.save!
+
+    user4 = User.new(
+      :email                 => "choanna@qa.com",
+      :password              => "12345678",
+      :password_confirmation => "12345678"
+  )
+  # user.skip_confirmation!
+  user4.save!
+
+q1 = Quest.create(
 	questgiver: user,
 	  adventurer: user,
 	  title: 'Q1',
@@ -40,5 +67,25 @@ Quest.create(
 	  price: 10.00,
 	  description: 'Quest...failed...',
 	  post_time: 20150412110000,
-	  expiration_time: 20150413210000
+	  expiration_time: 20150413210000,
+	)
+
+pending1 = Pending.create(
+	user_id: user.id,
+	quest_id: q1.id
+	)
+
+pending2 = Pending.create(
+	user_id: user2.id,
+	quest_id: q1.id
+	)
+
+pending3 = Pending.create(
+	user_id: user3.id,
+	quest_id: q1.id
+	)
+
+pending4 = Pending.create(
+	user_id: user4.id,
+	quest_id: q1.id
 	)

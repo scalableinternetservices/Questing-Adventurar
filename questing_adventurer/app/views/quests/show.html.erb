@@ -37,6 +37,13 @@
   <%= @quest.expiration_time %>
 </p>
 
+<p>
+  <strong>Pending adventure:</strong>
+  <% @quest.pendings.each do |p| %>
+    <%= p.user_id %>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_quest_path(@quest) %> |
 <%= link_to 'Back', quests_path %>
 
