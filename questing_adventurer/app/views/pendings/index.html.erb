@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Pendings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Quest</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pendings.each do |pending| %>
+      <tr>
+        <td><%= pending.quest %></td>
+        <td><%= pending.user %></td>
+        <td><%= link_to 'Show', pending %></td>
+        <td><%= link_to 'Edit', edit_pending_path(pending) %></td>
+        <td><%= link_to 'Destroy', pending, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pending', new_pending_path %>

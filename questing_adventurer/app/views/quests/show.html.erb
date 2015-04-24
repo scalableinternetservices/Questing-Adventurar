@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-4"> 
+
+<h1 id="notice"><%= notice %></h1>
 
 <p>
   <strong>Questgiver:</strong>
@@ -35,5 +37,19 @@
   <%= @quest.expiration_time %>
 </p>
 
+<p>
+  <strong>Pending adventure:</strong>
+  <% @quest.pendings.each do |p| %>
+    <%= p.user_id %>
+	<br />
+  <% end %>
+</p>
+
+<%= button_to 'I want the Quest!!', pendings_path(pending: {quest_id: @quest.id, user_id: current_user.id}) %>
+
+
+
 <%= link_to 'Edit', edit_quest_path(@quest) %> |
 <%= link_to 'Back', quests_path %>
+
+</div>
