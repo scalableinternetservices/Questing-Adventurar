@@ -1,0 +1,52 @@
+<div class="col-md-4"> 
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Questgiver:</strong>
+  <%= @quest.questgiver %>
+</p>
+
+<p>
+  <strong>Adventurer:</strong>
+  <%= @quest.adventurer %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @quest.title %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @quest.price %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @quest.description %>
+</p>
+
+<p>
+  <strong>Post time:</strong>
+  <%= @quest.post_time %>
+</p>
+
+<p>
+  <strong>Expiration time:</strong>
+  <%= @quest.expiration_time %>
+</p>
+
+<p>
+  <strong>Pending adventure:</strong>
+  <% @quest.pendings.each do |p| %>
+    <%= p.user_id %>
+	<br />
+  <% end %>
+</p>
+
+<%= button_to 'I want the Quest!!', pendings_path(pending: {quest_id: @quest.id, user_id: current_user.id}) %>
+<%= link_to 'Edit', edit_quest_path(@quest) %> |
+<%= link_to 'Back', quests_path %>
+
+</div>
