@@ -1,0 +1,39 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.jumbotron {
+  background-image:url('h1.jpg');
+  background-size: cover;
+  height: 600px;
+}
+
+.jumbotron:nth-child(2) {
+	background-image:url('h2.jpg');
+}
+.jumbotron h1 {
+  /*color: #C47135;*/
+  color: white;
+  font-size: 60px;  
+  text-align: center;
+}
+
+.jumbotron p {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+}
+
+
+.container {
+  height: auto;
+  width: 100%;
+}
+
+.jumbotron .btn {
+	@include button-variant(white, Transparent, white);
+}
+
+.btn-lg {
+	width: 200px;
+	height: 50px;
+ }

@@ -1,0 +1,41 @@
+
+<html>  
+<head>
+</head>
+<body>
+<div class="container">
+  <div class="jumbotron">
+  </br></br></br>
+    <div class="text-center"> 
+      <h1>Questing Adventurer</h1>
+      <p>Does anyone have some extra Boar Pelts?</p>
+      <p><%= button_to "Sign up", new_user_registration_path, :class => 'btn btn-success btn-lg' %></p>
+      <p><%= button_to "Login", new_user_session_path, :class => 'btn btn-success btn-lg' %></p>
+    </div>
+  </div>
+  <div class="row">
+    <h1 class="text-center">Choose Your Role</h1>
+    <div class="col-xs-6 text-center">
+      <h2>Give Me A Quest!</h2>
+<!--       <img src=<%=asset_path 'qa.png'%> class="img-responsive center-block" /> -->
+      <p>Become a Questgiver! Post a quest for an adventurer to complete!</p>
+      <p><a href="#" class="btn btn-success">Post a Quest &raquo;</a></p>
+    </div>
+    <div class="col-xs-6 text-center">
+      <h2>Quest Accepted!</h2>
+<!--       <img src=<%=asset_path 'qa.png'%> class="img-responsive center-block" /> -->
+      <p>Become an Adventurer! Take on demanding quests, and reap the rewards!</p>
+      <p><a href="listing" class="btn btn-success">Explore the Quest Board &raquo;</a></p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+      <footer>
+        <p>&copy; Copyright 2015 JVAR Inc.</p>
+      </footer>
+    </div>
+  </div>
+</div>
+</body>
+</html>
