@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :quests
   devise_for :users
 
-  root 'quests#index'
+  root 'quests#home'
 
   get 'listing',  to: 'quests#listing', as: 'listing'
   get 'home', to: 'quests#home', as: 'home'
