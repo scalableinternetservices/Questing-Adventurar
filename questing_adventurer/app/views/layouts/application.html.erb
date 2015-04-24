@@ -25,17 +25,16 @@
       <ul class="nav navbar-nav">
         <li class="active"><%= link_to "Home", home_path, :class => 'navbar-link'%></li>
         <li><%= link_to "Quest Listings", listing_path, :class => 'navbar-link'  %></li>
-        <li><a href="#" target="_blank">Post a Quest</a></li>
+        <li><%= link_to 'Post A Quest', new_quest_path, :class => 'navbar-link' %></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
         <li>
         <% if user_signed_in? %>
-          Logged in as <strong><%= current_user.email %></strong>.
           <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
         </li>
         <li>
           <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-        <li>
+        </li>
         <% else %>
         <li>
           <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %>
@@ -46,12 +45,15 @@
         <% end %>
       </ul>
     </div>
-
-
   </div>
 </nav>
+<% if user_signed_in? %>
+      <p class="text-right" id="Login"> Logged in as <strong><%= current_user.email %></strong>. </p>
+<% end %>
 
 <%= yield %>
+
+
 
 </body>
 </html>
