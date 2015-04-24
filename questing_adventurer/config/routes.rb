@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  resources :quests
-  resources :pendings
   devise_for :users
-
+  resources  :quests
+  
   root 'quests#home'
 
   get 'listing',  to: 'quests#listing', as: 'listing'
-  get 'home', to: 'quests#home', as: 'home'
+  get 'home',     to: 'quests#home',    as: 'home'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

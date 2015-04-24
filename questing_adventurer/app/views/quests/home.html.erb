@@ -1,4 +1,3 @@
-
 <html>  
 <head>
 </head>
@@ -19,13 +18,13 @@
       <h2>Give Me A Quest!</h2>
 <!--       <img src=<%=asset_path 'qa.png'%> class="img-responsive center-block" /> -->
       <p>Become a Questgiver! Post a quest for an adventurer to complete!</p>
-      <p><a href="#" class="btn btn-success">Post a Quest &raquo;</a></p>
+      <p><%= link_to "Post a Quest", new_quest_path, :class => 'btn btn-success'%></p>
     </div>
     <div class="col-xs-6 text-center">
       <h2>Quest Accepted!</h2>
 <!--       <img src=<%=asset_path 'qa.png'%> class="img-responsive center-block" /> -->
       <p>Become an Adventurer! Take on demanding quests, and reap the rewards!</p>
-      <p><a href="listing" class="btn btn-success">Explore the Quest Board &raquo;</a></p>
+      <p><%= link_to "Explore the Quest Board!", listing_path, :class => 'btn btn-success'%></p>
     </div>
   </div>
   <hr>

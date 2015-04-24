@@ -2,7 +2,8 @@
 
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
-Rails.application.config.assets.precompile += %w( public.js )
+
+# This is probably bad style! Let's try fix it using Sass properly.
 Rails.application.config.assets.precompile += %w( home.css )
 
 # Add additional assets to the asset load path
