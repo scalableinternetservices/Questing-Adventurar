@@ -48,26 +48,26 @@ q1 = Quest.create(
 	  title: 'Q1',
 	  price: 10.00,
 	  description: 'Give me a Quest!',
-	  post_time: 20150412110000,
-	  expiration_time: 20150413210000
+	  post_time: DateTime.now,
+	  expiration_time: DateTime.now
 	)
-Quest.create(
+q2 = Quest.create(
 	questgiver: user,
 	  adventurer: user,
 	  title: 'Q2',
 	  price: 10.00,
 	  description: 'Quest accepted!',
-	  post_time: 20150412110000,
-	  expiration_time: 20150413210000
+	  post_time: DateTime.now,
+	  expiration_time: DateTime.now
 	)
-Quest.create(
+q3 = Quest.create(
 	questgiver: user,
 	  adventurer: user,
 	  title: 'Q3',
 	  price: 10.00,
 	  description: 'Quest...failed...',
-	  post_time: 20150412110000,
-	  expiration_time: 20150413210000,
+	  post_time: DateTime.now,
+	  expiration_time: DateTime.now
 	)
 
 pending2 = Pending.create(
