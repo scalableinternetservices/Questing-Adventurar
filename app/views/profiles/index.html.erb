@@ -1,0 +1,75 @@
+<p id="notice"><%= notice %></p>
+
+<% if @profile.blank? %>
+  <%= link_to 'New Profile', new_profile_path %>
+<% else %>
+  <h1>Profile Information</h1>
+  <p>
+    <strong>User:</strong>
+    <%= @profile.user %>
+  </p>
+
+  <p>
+    <strong>First name:</strong>
+    <%= @profile.first_name %>
+  </p>
+
+  <p>
+    <strong>Last name:</strong>
+    <%= @profile.last_name %>
+  </p>
+
+  <p>
+    <strong>Gender:</strong>
+    <%= @profile.gender %>
+  </p>
+
+  <p>
+    <strong>Questgiver rating:</strong>
+    <%= @profile.questgiver_rating %>
+  </p>
+
+  <p>
+    <strong>Adventurer rating:</strong>
+    <%= @profile.adventurer_rating %>
+  </p>
+<% end %>
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back to Quest Listings', listing_path %> | 
+<%= link_to 'Change Account Information', edit_user_registration_path %>
+
+
+<% if false %>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Gender</th>
+      <th>Questgiver rating</th>
+      <th>Adventurer rating</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        <td><%=current_user.id %></td>
+        <td><%=@profiles.user_id%></td>
+        <td><%= @profiles.first_name %></td>
+        <td><%= @profiles.last_name %></td>
+        <td><%= @profiles.gender %></td>
+        <td><%= @profiles.questgiver_rating %></td>
+        <td><%= @profiles.adventurer_rating %></td>
+      </tr>
+  </tbody>
+</table>
+<% end %>
+
+<br>
+
+<%= link_to 'New Profile', new_profile_path %>
+
