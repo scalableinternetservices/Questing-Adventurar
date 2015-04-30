@@ -3,11 +3,12 @@ Rails.application.routes.draw do
   resources  :pendings
   resources  :quests
   resources  :profiles
+  resources :welcomes
   
-  root 'quests#home'
+  root 'welcomes#index'
 
   get 'listing',  to: 'quests#listing', as: 'listing'
-  get 'home',     to: 'quests#home',    as: 'home'
+  # get 'welcome',     to: 'welcomes#index',    as: 'home'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

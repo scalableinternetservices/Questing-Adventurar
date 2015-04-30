@@ -11,10 +11,7 @@ class QuestsController < ApplicationController
   def listing
     @quests = Quest.all
   end
-
-  def home
-    render :layout => 'home_layout'
-  end
+  
   # GET /quests/1
   # GET /quests/1.json
   def show
