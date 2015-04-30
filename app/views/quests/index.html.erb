@@ -19,8 +19,8 @@
   <tbody>
     <% @quests.each do |quest| %>
       <tr>
-        <td><%= quest.questgiver %></td>
-        <td><%= quest.adventurer %></td>
+        <td><%= quest.questgiver.username %></td>
+        <td><%= quest.adventurer.username %></td>
         <td><%= quest.title %></td>
         <td><%= quest.price %></td>
         <td><%= quest.description %></td>

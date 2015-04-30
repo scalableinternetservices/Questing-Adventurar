@@ -20,7 +20,7 @@
       <tbody>
         <% current_user.quests_accepted.each do |quest| %>
           <tr>
-            <td><%= quest.questgiver.profile.username %></td>
+            <td><%= quest.questgiver.username %></td>
             <td><%= quest.title %></td>
             <td><%= quest.price %></td>
             <td><%= quest.description %></td>
@@ -30,7 +30,7 @@
         <% end %>
         <% current_user.pending_quests.each do |quest| %>
           <tr class='info'>
-            <td><%= quest.questgiver.profile.username %></td>
+            <td><%= quest.questgiver.username %></td>
             <td><%= quest.title %></td>
             <td><%= quest.price %></td>
             <td><%= quest.description %></td>
@@ -60,7 +60,7 @@
       <tbody>
         <% current_user.quests_posted.each do |quest| %>
           <tr>
-            <td><%= quest.questgiver.profile.username %></td>
+            <td><%= quest.questgiver.username %></td>
             <td><%= quest.title %></td>
             <td><%= quest.price %></td>
             <td><%= quest.description %></td>

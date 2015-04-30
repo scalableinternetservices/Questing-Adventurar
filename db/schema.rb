@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150429220716) do
+ActiveRecord::Schema.define(version: 20150430081225) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id",  limit: 4
@@ -45,11 +45,9 @@ ActiveRecord::Schema.define(version: 20150429220716) do
     t.string  "gender",            limit: 255
     t.decimal "questgiver_rating",             precision: 10
     t.decimal "adventurer_rating",             precision: 10
-    t.string  "username",          limit: 255
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
-  add_index "profiles", ["username"], name: "index_profiles_on_username", using: :btree
 
   create_table "quests", force: :cascade do |t|
     t.integer  "questgiver_id",   limit: 4
@@ -77,10 +75,12 @@ ActiveRecord::Schema.define(version: 20150429220716) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "username",               limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   add_foreign_key "addresses", "users"
   add_foreign_key "pendings", "quests"

@@ -11,6 +11,7 @@ Quest.delete_all
 User.delete_all
 
   user = User.new(
+  	  :username              => "rydy",
       :email                 => "rydy@qa.com",
       :password              => "12345678",
       :password_confirmation => "12345678"
@@ -19,6 +20,7 @@ User.delete_all
   user.save!
 
   user2 = User.new(
+  	  :username              => "albur",
       :email                 => "albur@qa.com",
       :password              => "12345678",
       :password_confirmation => "12345678"
@@ -27,6 +29,7 @@ User.delete_all
   user2.save!
 
     user3 = User.new(
+   	  :username              => "vikwan",
       :email                 => "vikwan@qa.com",
       :password              => "12345678",
       :password_confirmation => "12345678"
@@ -35,6 +38,7 @@ User.delete_all
   user3.save!
 
     user4 = User.new(
+      :username              => "choanna",
       :email                 => "choanna@qa.com",
       :password              => "12345678",
       :password_confirmation => "12345678"
@@ -43,7 +47,7 @@ User.delete_all
   user4.save!
 
 q1 = Quest.create(
-	questgiver: user,
+	  questgiver: user,
 	  adventurer: user,
 	  title: 'Q1',
 	  price: 10.00,
