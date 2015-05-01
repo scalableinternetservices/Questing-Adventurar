@@ -50,6 +50,11 @@
 <% if user_signed_in? %>
       <p class="text-right" id="Login"> Logged in as <strong><%= current_user.username %></strong>. </p>
 <% end %>
+<div class="container">
+<% if notice %>
+  <div class="alert alert-success" role="alert"><%= notice %></div>
+<% end %>
 <%= yield %>
+</div>
 </body>
 </html>

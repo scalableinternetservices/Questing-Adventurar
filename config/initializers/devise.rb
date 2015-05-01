@@ -182,7 +182,6 @@ Devise.setup do |config|
   # config.last_attempt_warning = true
 
   # ==> Configuration for :recoverable
-  #
   # Defines which key will be used when recovering the password for an account
   config.reset_password_keys = [ :username ]
 

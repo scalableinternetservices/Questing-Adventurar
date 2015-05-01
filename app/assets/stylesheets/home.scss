@@ -2,7 +2,7 @@
 @import "bootstrap";
 
 .jumbotron {
-  background-image:url('h1.jpg');
+  background-image:image-url('h1.jpg');
   background-size: cover;
   height: 600px;
 }
@@ -19,7 +19,6 @@
   font-size: 20px;
   text-align: center;
 }
-
 
 .container {
   height: auto;
