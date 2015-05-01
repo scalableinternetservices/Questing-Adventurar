@@ -7,7 +7,6 @@
         <th>Title</th>
         <th>Price</th>
         <th>Description</th>
-        <th>Post time</th>
         <th>Expiration time</th>
       </tr>
     </thead>
@@ -19,8 +18,7 @@
           <td><%= quest.title %></td>
           <td><%= quest.price %></td>
           <td><%= quest.description %></td>
-          <td><%= quest.post_time %></td>
-          <td><%= quest.expiration_time %></td>
+          <td>in <%= time_ago_in_words(quest.expiration_time) %></td>
         </tr>
       <% end %>
       <% current_user.pending_quests.each do |quest| %>
@@ -29,8 +27,7 @@
           <td><%= quest.title %></td>
           <td><%= quest.price %></td>
           <td><%= quest.description %></td>
-          <td><%= quest.post_time %></td>
-          <td><%= quest.expiration_time %></td>
+          <td>in <%= time_ago_in_words(quest.expiration_time) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -57,8 +54,13 @@
           <td><%= quest.title %></td>
           <td><%= quest.price %></td>
           <td><%= quest.description %></td>
-          <td><%= quest.post_time %></td>
-          <td><%= quest.expiration_time %></td>
+          <td><%= time_ago_in_words(quest.post_time) %></td>
+          <td><%= time_ago_in_words(quest.expiration_time) %></td>
+          <td>
+            <%= link_to edit_quest_path(quest) do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

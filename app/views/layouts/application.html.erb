@@ -23,7 +23,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="nav navbar-nav">
-        <li <% if current_page?(listing_path) %>class="active"<% end %>><%= link_to "Home", listing_path, :class => 'navbar-link'%></li>
+        <li <% if current_page?(profiles_path) %>class="active"<% end %>><%= link_to "Home", profiles_path, :class => 'navbar-link'%></li>
         <li <% if current_page?(quests_path) %>class="active"<% end %>><%= link_to "Quest Listings", quests_path, :class => 'navbar-link'  %></li>
         <li <% if current_page?(new_quest_path) %>class="active"<% end %>><%= link_to 'Post A Quest', new_quest_path, :class => 'navbar-link' %></li>
       </ul>

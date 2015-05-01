@@ -7,10 +7,6 @@ class QuestsController < ApplicationController
   def index
     @quests = Quest.all
   end
-
-  def listing
-    @quests = Quest.all
-  end
   
   # GET /quests/1
   # GET /quests/1.json

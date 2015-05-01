@@ -1,4 +1,4 @@
-<h1>Listing Quests</h1>
+<h1>Quest Board</h1>
 
 <table class="table table-striped">
   <thead>
@@ -15,15 +15,15 @@
   </thead>
 
   <tbody>
-    <% @quests.each do |quest| %>
+    <% @quests.where(adventurer: nil).where.not(questgiver: current_user).find_each do |quest| %>
       <tr>
         <td><%= quest.questgiver.username %></td>
         <td><%= quest.adventurer.present? ? quest.adventurer.username : '' %></td>
         <td><%= quest.title %></td>
         <td><%= quest.price %></td>
         <td><%= quest.description %></td>
-        <td><%= quest.post_time %></td>
-        <td><%= quest.expiration_time %></td>
+        <td><%= time_ago_in_words(quest.post_time) %></td>
+        <td><%= time_ago_in_words(quest.expiration_time) %></td>
         <td><%= link_to 'Show', quest %></td>
         <td><%= link_to 'Edit', edit_quest_path(quest) %></td>
         <td><%= link_to 'Destroy', quest, method: :delete, data: { confirm: 'Are you sure?' } %></td>

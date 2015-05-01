@@ -3,13 +3,9 @@ Rails.application.routes.draw do
   resources  :pendings
   resources  :quests
   resources  :profiles
-  resources :welcomes
+  resources  :welcomes
   
   root 'welcomes#index'
-
-  get 'listing',  to: 'quests#listing', as: 'listing'
-  # get 'welcome',     to: 'welcomes#index',    as: 'home'
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

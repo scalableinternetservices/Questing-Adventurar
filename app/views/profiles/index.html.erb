@@ -1,35 +1,68 @@
-<h1>Listing Profiles</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Gender</th>
-      <th>Questgiver rating</th>
-      <th>Adventurer rating</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @profiles.each do |profile| %>
+<div id="accepted" class="col-md-6">
+  <h1>Accepted Quests</h1>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= profile.user %></td>
-        <td><%= profile.first_name %></td>
-        <td><%= profile.last_name %></td>
-        <td><%= profile.gender %></td>
-        <td><%= profile.questgiver_rating %></td>
-        <td><%= profile.adventurer_rating %></td>
-        <td><%= link_to 'Show', profile %></td>
-        <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
-        <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Questgiver</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Expiration time</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% current_user.quests_accepted.each do |quest| %>
+        <tr>
+          <td><%= quest.questgiver.username %></td>
+          <td><%= quest.title %></td>
+          <td><%= quest.price %></td>
+          <td><%= quest.description %></td>
+          <td>in <%= time_ago_in_words(quest.expiration_time) %></td>
+        </tr>
+      <% end %>
+      <% current_user.pending_quests.each do |quest| %>
+        <tr class='info'>
+          <td><%= quest.questgiver.username %></td>
+          <td><%= quest.title %></td>
+          <td><%= quest.price %></td>
+          <td><%= quest.description %></td>
+          <td>in <%= time_ago_in_words(quest.expiration_time) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div id="posted" class="col-md-6">
+  <h1>Posted Quests</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Questgiver</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Post time</th>
+        <th>Expiration time</th>
+      </tr>
+    </thead>
 
-<%= link_to 'New Profile', new_profile_path %>
+    <tbody>
+      <% current_user.quests_posted.each do |quest| %>
+        <tr>
+          <td><%= quest.questgiver.username %></td>
+          <td><%= quest.title %></td>
+          <td><%= quest.price %></td>
+          <td><%= quest.description %></td>
+          <td><%= time_ago_in_words(quest.post_time) %></td>
+          <td><%= time_ago_in_words(quest.expiration_time) %></td>
+          <td>
+            <%= link_to edit_quest_path(quest) do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
