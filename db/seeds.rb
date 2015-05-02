@@ -5,7 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Profile.delete_all
 
 Pending.delete_all
 Quest.delete_all
@@ -84,22 +83,4 @@ pending3 = Pending.create(
 pending4 = Pending.create(
 	user_id: user4.id,
 	quest_id: q1.id
-	)
-
-Profile.create(
-	user_id: user2.id,
-	first_name: 'Ryan',
-	last_name: 'Dai',
-	gender: 'Female',
-	questgiver_rating: 5,
-	adventurer_rating: 3
-	)
-
-Profile.create(
-	user_id: user4.id,
-	first_name: 'Ryan',
-	last_name: 'Dai',
-	gender: 'Female',
-	questgiver_rating: 5,
-	adventurer_rating: 3
 	)
