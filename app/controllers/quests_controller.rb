@@ -1,5 +1,5 @@
 class QuestsController < ApplicationController
-  before_action :set_quest, only: [:show, :edit, :update, :destroy]
+  before_action :set_quest, only: [:show, :edit, :update, :destroy, :accept]
   before_filter :authenticate_user!
 
   # GET /quests
@@ -20,6 +20,15 @@ class QuestsController < ApplicationController
 
   # GET /quests/1/edit
   def edit
+  end
+  
+  def accept
+    @quest.pendings.delete_all
+    @quest.adventurer = User.find(params[:adventurer])
+    @quest.status     = :closed
+    @quest.save!
+
+    redirect_to :back, notice: 'Pending adventurer accepted!'
   end
 
   # POST /quests

@@ -28,7 +28,7 @@ class PendingsController < ApplicationController
 
     respond_to do |format|
       if @pending.save
-        format.html { redirect_to @pending, notice: 'Pending was successfully created.' }
+        format.html { redirect_to :back, notice: 'Pending was successfully created.' }
         format.json { render :show, status: :created, location: @pending }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class PendingsController < ApplicationController
   def destroy
     @pending.destroy
     respond_to do |format|
-      format.html { redirect_to pendings_url, notice: 'Pending was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Pending was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
