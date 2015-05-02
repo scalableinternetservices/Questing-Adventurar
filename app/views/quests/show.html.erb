@@ -1,16 +1,14 @@
-<div class="col-md-4"> 
-
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Questgiver:</strong>
-  <%= @quest.questgiver %>
+  <%= @quest.questgiver.username %>
 </p>
 
+<% if @quest.adventurer %>
 <p>
   <strong>Adventurer:</strong>
-  <%= @quest.adventurer %>
+  <%= @quest.adventurer.username %>
 </p>
+<% end %>
 
 <p>
   <strong>Title:</strong>
@@ -38,15 +36,26 @@
 </p>
 
 <p>
-  <strong>Pending adventure:</strong>
-  <% @quest.pendings.each do |p| %>
-    <%= p.user_id %>
-	<br />
-  <% end %>
+  <strong>Pending adventurers!</strong>
+  <table>
+  <thead>
+    <tr>
+      <th>User</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @quest.pendings.each do |pending| %>
+      <tr>
+        <td><%= pending.user.username %></td>
+        <td><%= link_to 'Accept', accept_quests_path(id: @quest.id, adventurer: pending.user_id), method: :post %></td>
+        <td><%= link_to 'Reject', pending, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 </p>
 
 <%= button_to 'I want the Quest!!', pendings_path(pending: {quest_id: @quest.id, user_id: current_user.id}) %>
 <%= link_to 'Edit', edit_quest_path(@quest) %> |
 <%= link_to 'Back', quests_path %>
-
-</div>

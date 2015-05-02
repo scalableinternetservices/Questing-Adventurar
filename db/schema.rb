@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415183151) do
+ActiveRecord::Schema.define(version: 20150501232809) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id",  limit: 4
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20150415183151) do
     t.integer "user_id",  limit: 4
   end
 
-  add_index "pendings", ["quest_id"], name: "fk_rails_603b72ba32", using: :btree
-  add_index "pendings", ["user_id"], name: "fk_rails_bb775081d7", using: :btree
+  add_index "pendings", ["quest_id"], name: "fk_rails_1d42d25f6e", using: :btree
+  add_index "pendings", ["user_id"], name: "fk_rails_5df17245c3", using: :btree
 
   create_table "phone_numbers", force: :cascade do |t|
     t.integer "user_id",      limit: 4
@@ -57,10 +57,11 @@ ActiveRecord::Schema.define(version: 20150415183151) do
     t.string   "description",     limit: 255
     t.datetime "post_time"
     t.datetime "expiration_time"
+    t.integer  "status",          limit: 4
   end
 
-  add_index "quests", ["adventurer_id"], name: "fk_rails_9fc6778c3b", using: :btree
-  add_index "quests", ["questgiver_id"], name: "fk_rails_58a9590689", using: :btree
+  add_index "quests", ["adventurer_id"], name: "fk_rails_0c7092bc37", using: :btree
+  add_index "quests", ["questgiver_id"], name: "fk_rails_e14fc99b08", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -75,10 +76,12 @@ ActiveRecord::Schema.define(version: 20150415183151) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "username",               limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   add_foreign_key "addresses", "users"
   add_foreign_key "pendings", "quests"

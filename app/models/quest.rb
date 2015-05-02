@@ -9,4 +9,6 @@ class Quest < ActiveRecord::Base
   has_many :pendings
   has_many :pending_adventurers, through: :pendings, class_name: 'User',
            source: :user
+
+  enum status: [ :open, :closed, :success, :failure ]
 end
