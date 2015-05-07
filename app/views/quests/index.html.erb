@@ -1,5 +1,18 @@
 <h1>Quest Board</h1>
 
+<% form_tag quests_path, method: 'get' do %>
+<p>
+  <%= text_field_tag :search, params[:search] %>
+</p>
+<% end %>
+
+<%= form_tag quests_path, :method => 'get', :id => "quests_search" do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -15,7 +28,7 @@
   </thead>
 
   <tbody>
-    <% @quests.where(adventurer: nil).where.not(questgiver: current_user).find_each do |quest| %>
+    <% @quests.find_each do |quest| %>
       <tr>
         <td><%= quest.questgiver.username %></td>
         <td><%= quest.adventurer.present? ? quest.adventurer.username : '' %></td>
@@ -33,5 +46,6 @@
 </table>
 
 <br>
+<%= will_paginate @quests %>
 
 <%= link_to 'New Quest', new_quest_path %>
