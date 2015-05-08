@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 
   # Supplementary user information.
   has_one  :profile
+  accepts_nested_attributes_for :profile
+
   has_many :addresses
   has_many :phone_numbers
 
