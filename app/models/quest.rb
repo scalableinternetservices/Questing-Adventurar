@@ -8,7 +8,7 @@ class Quest < ActiveRecord::Base
 
   has_many :pendings
   has_many :pending_adventurers, through: :pendings, class_name: 'User',
-           source: :user
+           source: :user, dependent: :destroy
 
   enum status: [ :open, :closed, :success, :failure ]
 
