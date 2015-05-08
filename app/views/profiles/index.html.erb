@@ -1,68 +1,139 @@
-<div id="accepted" class="col-md-6">
-  <h1>Accepted Quests</h1>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Questgiver</th>
-        <th>Title</th>
-        <th>Price</th>
-        <th>Description</th>
-        <th>Expiration time</th>
-      </tr>
-    </thead>
+<div role="tabpanel">
 
-    <tbody>
-      <% current_user.quests_accepted.each do |quest| %>
-        <tr>
-          <td><%= quest.questgiver.username %></td>
-          <td><%= quest.title %></td>
-          <td><%= quest.price %></td>
-          <td><%= quest.description %></td>
-          <td>in <%= time_ago_in_words(quest.expiration_time) %></td>
-        </tr>
-      <% end %>
-      <% current_user.pending_quests.each do |quest| %>
-        <tr class='info'>
-          <td><%= quest.questgiver.username %></td>
-          <td><%= quest.title %></td>
-          <td><%= quest.price %></td>
-          <td><%= quest.description %></td>
-          <td>in <%= time_ago_in_words(quest.expiration_time) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-<div id="posted" class="col-md-6">
-  <h1>Posted Quests</h1>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Questgiver</th>
-        <th>Title</th>
-        <th>Price</th>
-        <th>Description</th>
-        <th>Post time</th>
-        <th>Expiration time</th>
-      </tr>
-    </thead>
+  <!-- Nav tabs -->
+  <ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="active"><a href="#dashboard" aria-controls="home" role="tab" data-toggle="tab">Dashboard</a></li>
+    <li role="presentation"><a href="#accepted" aria-controls="profile" role="tab" data-toggle="tab">Accepted Quests</a></li>
+    <li role="presentation"><a href="#posted" aria-controls="messages" role="tab" data-toggle="tab">Posted Quests</a></li>
+    <li role="presentation"><a href="#history" aria-controls="settings" role="tab" data-toggle="tab">History</a></li>
+  </ul>
 
-    <tbody>
-      <% current_user.quests_posted.each do |quest| %>
-        <tr>
-          <td><%= quest.questgiver.username %></td>
-          <td><%= link_to quest.title, quest_path(quest) %></td>
-          <td><%= quest.price %></td>
-          <td><%= quest.description %></td>
-          <td><%= time_ago_in_words(quest.post_time) %></td>
-          <td><%= time_ago_in_words(quest.expiration_time) %></td>
-          <td>
-            <%= link_to edit_quest_path(quest) do %>
-              <span class="glyphicon glyphicon-pencil"></span>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="dashboard">
+      <h1>Welcome back, <%= current_user.profile.first_name %>!</h1>
+      <p>You're currently adventuring through some number of quests.</p>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="accepted">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Questgiver</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Expiration time</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% current_user.quests_accepted.where("status < 2").each do |quest| %>
+            <tr>
+              <td><%= quest.questgiver.username %></td>
+              <td><%= quest.title %></td>
+              <td><%= quest.price %></td>
+              <td><%= quest.description %></td>
+              <td>in <%= time_ago_in_words(quest.expiration_time) %></td>
+              <td class="text-right">
+                <%= link_to complete_quests_path(id: quest, s: true), method: :post, class: "btn btn-success" do %>
+                  <span class="glyphicon glyphicon-ok"></span>
+                <% end %>
+                <%= link_to complete_quests_path(id: quest, s: false), method: :post, class: "btn btn-danger" do %>
+                  <span class="glyphicon glyphicon-remove"></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          <% current_user.pendings.each do |pq| %>
+            <% Quest.find(pq.quest_id) do |quest| %>
+            <tr class="active">
+              <td><%= quest.questgiver.username %></td>
+              <td><%= quest.title %></td>
+              <td><%= quest.price %></td>
+              <td><%= quest.description %></td>
+              <td>in <%= time_ago_in_words(quest.expiration_time) %></td>
+              <td class="text-right">
+                <%= link_to pending_path(pq), method: :delete, class: "btn btn-danger" do %>
+                  <span class="glyphicon glyphicon-remove"></span>
+                <% end %>
+              </td>
+            </tr>
             <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="posted">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Questgiver</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Post time</th>
+            <th>Expiration time</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% current_user.quests_posted.each do |quest| %>
+            <tr>
+              <td><%= quest.questgiver.username %></td>
+              <td><%= quest.title %></td>
+              <td><%= quest.price %></td>
+              <td><%= quest.description %></td>
+              <td><%= time_ago_in_words(quest.post_time) %></td>
+              <td><%= time_ago_in_words(quest.expiration_time) %></td>
+              <td class="text-right">
+                <%= link_to quest_path(quest), class: "btn btn-default" do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="history">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Questgiver</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Post time</th>
+            <th>Expiration time</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% current_user.quests_accepted.where("status >= 2").each do |quest| %>
+            <tr>
+              <td><%= quest.questgiver.username %></td>
+              <td><%= quest.title %></td>
+              <td><%= quest.price %></td>
+              <td><%= quest.description %></td>
+              <td><%= time_ago_in_words(quest.post_time) %></td>
+              <td><%= time_ago_in_words(quest.expiration_time) %></td>
+              <td>
+                <%= link_to quest_path(quest), class: "btn btn-default" do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+
+<% content_for :javascript do %>
+  <%= javascript_include_tag 'profile' %>
+<% end %>
+
