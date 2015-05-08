@@ -4,10 +4,13 @@ class QuestsController < ApplicationController
 
   # GET /quests
   # GET /quests.json
+
+
   def index
-    @quests = Quest.all
+    @quests = Quest.search(params[:search]).paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
+    #@quests = Quest.all.paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
   end
-  
+
   # GET /quests/1
   # GET /quests/1.json
   def show

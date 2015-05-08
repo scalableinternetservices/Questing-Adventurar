@@ -11,4 +11,13 @@ class Quest < ActiveRecord::Base
            source: :user
 
   enum status: [ :open, :closed, :success, :failure ]
+
+	def self.search(search)
+	  if search
+	    where('title LIKE ?', "%#{search}%")
+	  else
+	    all
+	  end
+	end
+
 end
