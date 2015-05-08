@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :quests do
     collection do
       post :accept
+      post :complete
     end
   end
 
