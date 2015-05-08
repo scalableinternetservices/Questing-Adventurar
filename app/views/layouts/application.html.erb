@@ -23,14 +23,13 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="nav navbar-nav">
-        <li <% if current_page?(profiles_path) %>class="active"<% end %>><%= link_to "Home", profiles_path, :class => 'navbar-link'%></li>
         <li <% if current_page?(quests_path) %>class="active"<% end %>><%= link_to "Quest Listings", quests_path, :class => 'navbar-link'  %></li>
         <li <% if current_page?(new_quest_path) %>class="active"<% end %>><%= link_to 'Post A Quest', new_quest_path, :class => 'navbar-link' %></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
         <% if user_signed_in? %>
         <li>
-            <%= link_to current_user.username, profile_path(current_user.profile), :class => 'navbar-link' %>
+            <%= link_to current_user.username, edit_user_registration_path, :class => 'navbar-link' %>
         </li>
         <li>
           <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>

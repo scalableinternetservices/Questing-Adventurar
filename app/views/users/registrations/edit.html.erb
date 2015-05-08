@@ -29,6 +29,21 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
+  <%= f.fields_for :profile, current_user.profile do |profile_form| %>
+    <div class="field">
+      <%= profile_form.label :first_name %><br>
+      <%= profile_form.text_field :first_name %>
+    </div>
+    <div class="field">
+      <%= profile_form.label :last_name %><br>
+      <%= profile_form.text_field :last_name %>
+    </div>
+    <div class="field">
+      <%= profile_form.label :gender %><br>
+      <%= profile_form.select(:gender, [['Male', 'Male'], ['Female', 'Female']]) %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
