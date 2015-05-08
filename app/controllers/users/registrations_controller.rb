@@ -41,7 +41,7 @@ before_filter :configure_sign_up_params, only: [:create]
   # You can put the params you want to permit in the empty array.
   def configure_sign_up_params
     devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(
-      {profile_attributes: [:id, :first_name, :last_name]},
+      {profile_attributes: [:id, :first_name, :last_name, :gender]},
       :email, :username, :password, :password_confirmation
     )}
   end
