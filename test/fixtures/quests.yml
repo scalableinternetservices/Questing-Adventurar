@@ -4,29 +4,52 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-milk:
-  questgiver: ryan
-  adventurer: albert
-  title: Milk and Honey
+quest0:
+  questgiver: victor_user
+  adventurer: 
+  title: Q0
   price: 10.00
   description: Please get me milk!
-  post_time: 2015-04-12 11:00:00
-  expiration_time: 2015-04-13 21:00:00
+  post_time: <%= 5.day.ago.to_s(:db) %>
+  expiration_time: <%= 5.day.from_now.to_s(:db) %>
+  status: 0
 
-cereal:
-  questgiver: albert
-  adventurer:
-  title: Cereal Killer
+quest1:
+  questgiver: albert_user
+  adventurer: victor_user
+  title: Q1
   price: 13.00
   description: Cheerios please!
-  post_time: 2015-04-12 11:30:00
-  expiration_time: 2015-04-13 21:00:00
+  post_time: <%= 5.day.ago.to_s(:db) %>
+  expiration_time: <%= 5.day.from_now.to_s(:db) %>
+  status: 1
 
-one:
-  questgiver: ryan
-  adventurer: albert
-  title: Milk and Honey
+quest2:
+  questgiver: ryan_user
+  adventurer: victor_user
+  title: Q2
   price: 10.00
   description: Please get me milk!
-  post_time: 2015-04-12 11:00:00
-  expiration_time: 2015-04-13 21:00:00
+  post_time: <%= 5.day.ago.to_s(:db) %>
+  expiration_time: <%= 5.day.from_now.to_s(:db) %>
+  status: 1
+
+quest3:
+  questgiver: ryan_user
+  adventurer: victor_user
+  title: Q3
+  price: 10.00
+  description: Please get me milk!
+  post_time: <%= 5.day.ago.to_s(:db) %>
+  expiration_time: <%= 5.day.from_now.to_s(:db) %>
+  status: 2
+
+quest4:
+  questgiver: joanna_user
+  adventurer: 
+  title: Q4
+  price: 10.00
+  description: Please get me milk!
+  post_time: <%= 5.day.ago.to_s(:db) %>
+  expiration_time: <%= 5.day.from_now.to_s(:db) %>
+  status: 2
