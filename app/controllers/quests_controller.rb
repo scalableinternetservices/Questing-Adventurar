@@ -52,6 +52,7 @@ class QuestsController < ApplicationController
   # POST /quests.json
   def create
     @quest = Quest.new(quest_params)
+    @quest.questgiver = current_user
 
     respond_to do |format|
       if @quest.save

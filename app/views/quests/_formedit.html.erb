@@ -16,8 +16,10 @@
     <%= @quest.questgiver.username %>
   </div>
   <div class="field">
+  <% if @quest.adventurer %>
     <%= f.label :adventurer_id %><br>
     <%= @quest.adventurer.username %>
+  <% end %>
   </div>
   <div class="field">
     <%= f.label :title %><br>

@@ -10,17 +10,6 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-
-    <%= f.label :questgiver_id %><br>
-    <%= f.hidden_field :questgiver_id, value: current_user.id %>
-    <%= current_user.username %>
-  </div>
-  <div class="field">
-    <%= f.label :adventurer_id %><br>
-    <%= f.text_field :adventurer_id %>
-  </div>
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>

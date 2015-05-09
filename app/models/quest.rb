@@ -1,5 +1,5 @@
 class Quest < ActiveRecord::Base
-  validates :questgiver, :title, :price, :description,
+  validates :title, :price, :description,
             :post_time, :expiration_time, presence: true
   validates :price, numericality: {greater_than_or_equal_to: 0.01}
   
