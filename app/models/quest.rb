@@ -15,15 +15,17 @@ class Quest < ActiveRecord::Base
   acts_as_taggable # Alias for acts_as_taggable_on :tags
   acts_as_taggable_on :skills, :interests
 
-	def self.search(search)
-	  if search
-      keywords = search.split(' ')
-	    # where('title LIKE ? OR description LIKE ?', "%#{search}%", "%#{search}%")
-      # Find users with any of the specified tags:
-      Quest.tagged_with(keywords, :any => true)
-	  else
-	    all
-	  end
-	end
+# 	def self.search(search)
+# 	  if search
+      
+# 	    @title_description_result = Quest.where('title LIKE ? OR description LIKE ?', "%#{search}%", "%#{search}%")
+#       # keywords = search.split(' ')
+#       # @tags_result = Quest.tagged_with(keywords, :any => true)
+#       # @result = @title_description_result + @tags_result
+#       # @result.sort_by(&:title)
+# 	  else
+# 	    all
+# 	  end
+# 	end
 
 end

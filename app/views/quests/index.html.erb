@@ -1,34 +1,37 @@
 <h1>Quest Board</h1>
 
-<% form_tag quests_path, method: 'get' do %>
-<p>
-  <%= text_field_tag :search, params[:search] %>
-</p>
+
+<%= search_form_for @search do |f| %>
+  <div class="field">
+    <!-- NEED IMPROVEMENT -->
+    <%= f.label :title_or_description_cont_any, "Keywords  " %>
+    <%= f.text_field :title_or_description_cont_any, size: 20 %>
+  </div>
+  <div class="field">
+    <%= f.label :price_gteq, "Price Between" %>
+    <%= f.text_field :price_gteq, size: 5 %>
+    <%= f.label :price_lteq, "and" %>
+    <%= f.text_field :price_lteq, size: 5 %>
+    <!-- <input type="hidden" name="q[adventurer_id_blank]" id="q_adventurer_id_blank" value = '1'> -->
+    <!-- <input type="hidden" name="q[questgiver_id_not_eq]" id="q_questgiver_id_not_eq" value = <%= current_user.id%>> -->
+  </div>
+  <div class="actions"><%= f.submit "Search" %></div>
 <% end %>
 
-<%= form_tag quests_path, :method => 'get', :id => "quests_search" do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
-
+<br />
 <table class="table table-striped">
-  <thead>
     <tr>
-      <th>Questgiver</th>
-      <th>Adventurer</th>
-      <th>Title</th>
-      <th>Price</th>
-      <th>Description</th>
-      <th>Post time</th>
-      <th>Expiration time</th>
+      <th><%= sort_link @search, :questgiver, "Questgiver" %></th>
+      <th><%= sort_link @search, :adventurer, "Adventurer" %></th>
+      <th><%= sort_link @search, :title, "Title" %></th>
+      <th><%= sort_link @search, :price, "Price" %></th>
+      <th><%= sort_link @search, :description, "Description" %></th>
+      <th><%= sort_link @search, :post_time, "Post time" %></th>
+      <th><%= sort_link @search, :expiration_time, "Expiration time" %></th>
       <th colspan="3"></th>
     </tr>
-  </thead>
-
   <tbody>
-    <% @quests.find_each do |quest| %>
+    <% @quests.each do |quest| %>
       <tr>
         <td><%= quest.questgiver.username %></td>
         <td><%= quest.adventurer.present? ? quest.adventurer.username : '' %></td>
@@ -45,7 +48,7 @@
   </tbody>
 </table>
 
-<br>
-<%= will_paginate @quests %>
+<br />
+<%= will_paginate @quests if false%>
 
 <%= link_to 'New Quest', new_quest_path %>
