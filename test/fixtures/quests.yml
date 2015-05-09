@@ -29,7 +29,7 @@ quest2:
   adventurer: victor_user
   title: Q2
   price: 10.00
-  description: Please get me milk!
+  description: Please get me steak!
   post_time: <%= 5.day.ago.to_s(:db) %>
   expiration_time: <%= 5.day.from_now.to_s(:db) %>
   status: 1
@@ -39,7 +39,7 @@ quest3:
   adventurer: victor_user
   title: Q3
   price: 10.00
-  description: Please get me milk!
+  description: Please get me jam!
   post_time: <%= 5.day.ago.to_s(:db) %>
   expiration_time: <%= 5.day.from_now.to_s(:db) %>
   status: 2
@@ -49,7 +49,7 @@ quest4:
   adventurer: 
   title: Q4
   price: 10.00
-  description: Please get me milk!
+  description: Chicken is on sale!
   post_time: <%= 5.day.ago.to_s(:db) %>
   expiration_time: <%= 5.day.from_now.to_s(:db) %>
   status: 2
