@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20150501232809) do
     t.integer "user_id",  limit: 4
   end
 
-  add_index "pendings", ["quest_id"], name: "fk_rails_1d42d25f6e", using: :btree
-  add_index "pendings", ["user_id"], name: "fk_rails_5df17245c3", using: :btree
+  add_index "pendings", ["quest_id"], name: "fk_rails_22cc408d6a", using: :btree
+  add_index "pendings", ["user_id"], name: "fk_rails_70976a1bc2", using: :btree
 
   create_table "phone_numbers", force: :cascade do |t|
     t.integer "user_id",      limit: 4
@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 20150501232809) do
     t.integer  "status",          limit: 4
   end
 
-  add_index "quests", ["adventurer_id"], name: "fk_rails_0c7092bc37", using: :btree
-  add_index "quests", ["questgiver_id"], name: "fk_rails_e14fc99b08", using: :btree
+  add_index "quests", ["adventurer_id"], name: "fk_rails_6752108a7c", using: :btree
+  add_index "quests", ["questgiver_id"], name: "fk_rails_047e37aca2", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
