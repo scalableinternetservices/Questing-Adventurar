@@ -4,18 +4,35 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-ryan:
-  user: ryan
+
+ryan_profile:
+  user: ryan_user
   first_name: Ryan
   last_name: Dai
   gender: Male
   questgiver_rating: 3.0
-  adventurer_rating: 3.0
+  adventurer_rating: 4.0
 
-albert:
-  user: albert
+albert_profile:
+  user: albert_user
   first_name: Albert
   last_name: Wong
   gender: Male
-  questgiver_rating: 2.9
-  adventurer_rating: 3.1
+  questgiver_rating: 3.0
+  adventurer_rating: 2.0
+
+joanna_profile:
+  user: joanna_user
+  first_name: Joanna
+  last_name: Chen
+  gender: Female
+  questgiver_rating: 3.0
+  adventurer_rating: 5.0
+
+victor_profile:
+  user: victor_user
+  first_name: Victor
+  last_name: Kwan
+  gender: Male
+  questgiver_rating: 2.0
+  adventurer_rating: 4.0

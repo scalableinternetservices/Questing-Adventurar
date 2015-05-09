@@ -18,18 +18,32 @@ def edit
 end
 # POST /pendings
 # POST /pendings.json
-def create
-@pending = Pending.new(pending_params)
-respond_to do |format|
-if @pending.save
-format.html { redirect_to :back, notice: 'Pending was successfully created.' }
-format.json { render :show, status: :created, location: @pending }
-else
-format.html { render :new }
-format.json { render json: @pending.errors, status: :unprocessable_entity }
-end
-end
-end
+ def create
+    @pending = Pending.new(pending_params) 
+    @pending_validation = current_user.pendings # gets list of quests user currently has pending
+
+    @pending_is_valid = true;
+    @pending_validation.each do |pending| #for each pending user has, check if quest id equal to pending about to be added
+        if pending.quest_id == @pending.quest_id
+           @pending_is_valid = false;
+        end
+    end
+
+    @quest = Quest.find_by id: @pending.quest_id
+
+    respond_to do |format|
+      if !@pending_is_valid
+        format.html { redirect_to @quest, notice: 'You already requested to do this quest!' }
+        format.json { render json: @pending.errors, status: :unprocessable_entity }
+      elsif @pending.save
+        format.html { redirect_to @pending, notice: 'You have successfully requested this quest!' }
+        format.json { render :show, status: :created, location: @pending }
+      else
+        format.html { render :new }
+        format.json { render json: @pending.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 # PATCH/PUT /pendings/1
 # PATCH/PUT /pendings/1.json
 def update

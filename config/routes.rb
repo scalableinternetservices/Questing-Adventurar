@@ -1,17 +1,21 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {registrations: "users/registrations"}
   resources  :pendings
   resources  :quests
   resources  :profiles
   resources  :welcomes
-  
-  root 'welcomes#index'
 
   resources :quests do
     collection do
       post :accept
+      post :complete
     end
   end
+
+  authenticated :user do
+    root :to => 'profiles#index', :as => :authenticated_root
+  end
+  root 'welcomes#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

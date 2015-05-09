@@ -12,14 +12,12 @@
   <% end %>
 
   <div class="field">
-
     <%= f.label :questgiver_id %><br>
-    <%= f.hidden_field :questgiver_id, value: current_user.id %>
-    <%= current_user.username %>
+    <%= @quest.questgiver.username %>
   </div>
   <div class="field">
     <%= f.label :adventurer_id %><br>
-    <%= f.text_field :adventurer_id %>
+    <%= @quest.adventurer.username %>
   </div>
   <div class="field">
     <%= f.label :title %><br>
@@ -33,10 +31,11 @@
     <%= f.label :description %><br>
      <%= f.text_area :description, rows: 6, cols: 50 %>
   </div>
-  <div class="field">
-    <%= f.label :post_time %><br>
-    <%= f.datetime_select :post_time %>
-  </div>
+ <p>
+  <strong>Post time:</strong>
+  <%= @quest.post_time %>
+</p>
+
   <div class="field">
     <%= f.label :expiration_time %><br>
     <%= f.datetime_select :expiration_time %>

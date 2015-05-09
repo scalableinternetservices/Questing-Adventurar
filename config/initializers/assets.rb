@@ -5,6 +5,7 @@ Rails.application.config.assets.version = '1.0'
 
 # This is probably bad style! Let's try fix it using Sass properly.
 Rails.application.config.assets.precompile += %w( home.css )
+Rails.application.config.assets.precompile += %w( profile.js )
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
