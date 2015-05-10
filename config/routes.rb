@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources  :profiles
   resources  :welcomes
 
+  get 'tags/:tag', to: 'quests#index', as: :tag
+
   resources :quests do
     collection do
       post :accept

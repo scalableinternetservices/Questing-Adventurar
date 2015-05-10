@@ -27,9 +27,7 @@
 
 <p>
   <strong>Tags:</strong>
-  <% @quest.tag_list.each do |tag| %>
-  <%= tag %>
-  <% end %>
+  <%= raw @quest.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
 </p>
 
 
