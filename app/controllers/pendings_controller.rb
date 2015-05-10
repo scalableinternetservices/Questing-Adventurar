@@ -36,7 +36,7 @@ end
         format.html { redirect_to @quest, notice: 'You already requested to do this quest!' }
         format.json { render json: @pending.errors, status: :unprocessable_entity }
       elsif @pending.save
-        format.html { redirect_to @pending, notice: 'You have successfully requested this quest!' }
+        format.html { redirect_to @quest, notice: 'You have successfully requested this quest!' }
         format.json { render :show, status: :created, location: @pending }
       else
         format.html { render :new }

@@ -49,8 +49,10 @@
         <% @quest.pendings.each do |pending| %>
           <tr>
             <td><%= pending.user.username %></td>
-            <td><%= link_to 'Accept', accept_quests_path(id: @quest.id, adventurer: pending.user_id), method: :post %></td>
-            <td><%= link_to 'Reject', pending, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% if current_user == @quest.questgiver %>
+                <td><%= link_to 'Accept', accept_quests_path(id: @quest.id, adventurer: pending.user_id), method: :post %></td>
+                <td><%= link_to 'Reject', pending, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
           </tr>
         <% end %>
     </tbody>
