@@ -13,9 +13,7 @@
     <div role="tabpanel" class="tab-pane active" id="dashboard">
       <h1>Welcome back, <%= current_user.profile.first_name %>!</h1>
       <p>You're currently adventuring through some number of quests.</p>
-    </div>
-    <div>
-      <% current_user.reviews.each do |review| %>
+       <% current_user.reviews.each do |review| %>
       <tr>
         <td> <%= review.rating %></td>
         <td> <%= review.comment %></td>
