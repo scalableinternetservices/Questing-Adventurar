@@ -1,6 +1,6 @@
 <h1>Quest Board</h1>
 
-
+<%= will_paginate @quests if false%>
 <%= search_form_for @search do |f| %>
   <div class="field">
     <!-- NEED IMPROVEMENT -->
@@ -55,6 +55,6 @@
 </table>
 
 <br />
-<%= will_paginate @quests if false%>
+<%= will_paginate @collection, renderer: BootstrapPagination::Rails %>
 
 <%= link_to 'New Quest', new_quest_path %>

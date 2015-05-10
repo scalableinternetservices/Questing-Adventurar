@@ -10,10 +10,12 @@ class QuestsController < ApplicationController
   def index
     if params[:tag]
       @search = Quest.search(params[:q])
-      @quests = Quest.tagged_with(params[:tag]).paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
+      @quests = @search.result.tagged_with(params[:tag]).paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
+      # @quests = Quest.tagged_with(params[:tag]).paginate(per_page: 10, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
     else
       @search = Quest.search(params[:q])
       # @search = Quest.search(questgiver_id_not_eq: current_user.id, adventurer_id_blank: '1')
+      # @quests = @search.result.paginate(per_page: 10, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
       @quests = @search.result.paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
     end
     
@@ -71,6 +73,7 @@ class QuestsController < ApplicationController
         format.json { render json: @quest.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /quests/1

@@ -29,7 +29,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
-gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'ransack', '~> 1.6.6'
 
