@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150509001151) do
+ActiveRecord::Schema.define(version: 20150510080932) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id",  limit: 4
@@ -63,6 +63,19 @@ ActiveRecord::Schema.define(version: 20150509001151) do
   add_index "quests", ["adventurer_id"], name: "fk_rails_6f9b60add0", using: :btree
   add_index "quests", ["questgiver_id"], name: "fk_rails_8d95dd76a6", using: :btree
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "quest_id",      limit: 4
+    t.integer  "questgiver_id", limit: 4
+    t.integer  "adventurer_id", limit: 4
+    t.integer  "rating",        limit: 4
+    t.string   "comment",       limit: 255
+    t.datetime "post_time"
+  end
+
+  add_index "reviews", ["adventurer_id"], name: "fk_rails_18f262acde", using: :btree
+  add_index "reviews", ["quest_id"], name: "fk_rails_b45ce002d9", using: :btree
+  add_index "reviews", ["questgiver_id"], name: "fk_rails_c4c3fb34ac", using: :btree
+
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id",        limit: 4
     t.integer  "taggable_id",   limit: 4
@@ -110,4 +123,7 @@ ActiveRecord::Schema.define(version: 20150509001151) do
   add_foreign_key "profiles", "users"
   add_foreign_key "quests", "users", column: "adventurer_id"
   add_foreign_key "quests", "users", column: "questgiver_id"
+  add_foreign_key "reviews", "quests"
+  add_foreign_key "reviews", "users", column: "adventurer_id"
+  add_foreign_key "reviews", "users", column: "questgiver_id"
 end

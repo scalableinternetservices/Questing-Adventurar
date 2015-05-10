@@ -48,6 +48,6 @@ class CreateDatabase < ActiveRecord::Migration
 
     add_foreign_key :pendings, :quests
     add_foreign_key :pendings, :users
-    
-  end
+
+
 end

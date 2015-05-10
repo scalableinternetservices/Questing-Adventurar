@@ -38,7 +38,7 @@ class QuestsController < ApplicationController
   def accept
     Pending.delete_all(quest_id: @quest.id)
     @quest.adventurer = User.find(params[:adventurer])
-    @quest.status     = :closed
+    @quest.status     = :accepted
     @quest.save!
 
     redirect_to :back, notice: 'Pending adventurer accepted!'
@@ -48,7 +48,7 @@ class QuestsController < ApplicationController
   def complete
     puts "I'm currently working with #{@quest}"
     if params[:s] == "true"
-      @quest.status = :success
+      @quest.status = :complete
     elsif params[:s] == "false"
       @quest.status = :failure
     end

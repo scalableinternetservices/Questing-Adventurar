@@ -27,7 +27,12 @@
 <br />
 <table class="table table-striped">
     <tr>
+<<<<<<< HEAD
       <!-- <th><%= sort_link @search, :adventurer_id, "Adventurer" %></th> -->
+=======
+      <th><%= sort_link @search, :questgiver, "Questgiver" %></th>
+      <!-- <th><%= sort_link @search, :adventurer, "Adventurer" %></th> -->
+>>>>>>> Rating
       <th><%= sort_link @search, :title, "Title" %></th>
       <th><%= sort_link @search, :price, "Price" %></th>
       <th><%= sort_link @search, :description, "Description" %></th>
@@ -39,8 +44,14 @@
   <tbody>
     <% @quests.each do |quest| %>
       <tr>
+<<<<<<< HEAD
         <!-- <td><%= quest.adventurer.present? ? quest.adventurer.username : '' %></td> -->
         <td><%= link_to quest.title, quest %></td>
+=======
+        <td><%= quest.questgiver.username %></td>
+        <!-- <td><%= quest.adventurer.present? ? quest.adventurer.username : '' %></td> -->
+        <td><%= quest.title %></td>
+>>>>>>> Rating
         <td><%= quest.price %></td>
         <td><%= quest.description %></td>
         <td><%= time_ago_in_words(quest.post_time) %></td>

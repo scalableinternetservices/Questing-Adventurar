@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources  :quests
   resources  :profiles
   resources  :welcomes
+  resources  :reviews
 
   get 'tags/:tag', to: 'quests#index', as: :tag
 

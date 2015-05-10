@@ -9,11 +9,15 @@ class Quest < ActiveRecord::Base
   has_many :pendings
   has_many :pending_adventurers, through: :pendings, class_name: 'User',
            source: :user, dependent: :destroy
+  has_one :review, class_name: 'Review', foreign_key: :quest_id
 
-  enum status: [ :open, :closed, :success, :failure ]
+  enum status: [ :open, :accepted, :complete, :success, :failure ]
 
   acts_as_taggable # Alias for acts_as_taggable_on :tags
+<<<<<<< HEAD
   
+=======
+>>>>>>> Rating
 
 # 	def self.search(search)
 # 	  if search
