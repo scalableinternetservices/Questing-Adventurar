@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
   has_many :pendings
   has_many :pending_quests, through: :pendings, class_name: 'Quest', source: :quest, dependent: :destroy
 
+  has_many :reviews, class_name: 'Review', foreign_key: :adventurer_id
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)

@@ -14,6 +14,14 @@
       <h1>Welcome back, <%= current_user.profile.first_name %>!</h1>
       <p>You're currently adventuring through some number of quests.</p>
     </div>
+    <div>
+      <% current_user.reviews.each do |review| %>
+      <tr>
+        <td> <%= review.rating %></td>
+        <td> <%= review.comment %></td>
+      </tr>
+      <% end %>
+    </div>
     <div role="tabpanel" class="tab-pane" id="accepted">
       <table class="table">
         <thead>
@@ -85,6 +93,11 @@
               <td><%= quest.description %></td>
               <td><%= time_ago_in_words(quest.post_time) %></td>
               <td><%= time_ago_in_words(quest.expiration_time) %></td>
+              <td class="text-right">
+                <%= link_to new_review_path(param: {quest_id: quest.id, questgiver_id: quest.questgiver_id, adventurer_id: quest.adventurer_id}), class: "btn btn-default" do %>
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                <% end %>
+              </td>
               <td class="text-right">
                 <%= link_to quest_path(quest), class: "btn btn-default" do %>
                   <span class="glyphicon glyphicon-chevron-right"></span>

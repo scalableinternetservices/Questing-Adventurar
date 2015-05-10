@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @review.rating %>
+</p>
+
+<p>
+  <strong>Quest:</strong>
+  <%= @review.quest %>
+</p>
+
+<p>
+  <strong>Questgiver:</strong>
+  <%= @review.questgiver %>
+</p>
+
+<p>
+  <strong>Adventurer:</strong>
+  <%= @review.adventurer %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @review.comment %>
+</p>
+
+<p>
+  <strong>Post time:</strong>
+  <%= @review.post_time %>
+</p>
+
+<%= link_to 'Edit', edit_review_path(@review) %> |
+<%= link_to 'Back', reviews_path %>
