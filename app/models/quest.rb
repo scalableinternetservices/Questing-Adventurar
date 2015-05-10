@@ -14,22 +14,5 @@ class Quest < ActiveRecord::Base
   enum status: [ :open, :accepted, :complete, :success, :failure ]
 
   acts_as_taggable # Alias for acts_as_taggable_on :tags
-<<<<<<< HEAD
-  
-=======
->>>>>>> Rating
-
-# 	def self.search(search)
-# 	  if search
-      
-# 	    @title_description_result = Quest.where('title LIKE ? OR description LIKE ?', "%#{search}%", "%#{search}%")
-#       # keywords = search.split(' ')
-#       # @tags_result = Quest.tagged_with(keywords, :any => true)
-#       # @result = @title_description_result + @tags_result
-#       # @result.sort_by(&:title)
-# 	  else
-# 	    all
-# 	  end
-# 	end
 
 end
