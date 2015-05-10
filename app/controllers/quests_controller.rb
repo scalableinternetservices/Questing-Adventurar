@@ -36,7 +36,7 @@ class QuestsController < ApplicationController
   
   # POST /quests/accept
   def accept
-    @quest.pendings.delete_all
+    Pending.delete_all(quest_id: @quest.id)
     @quest.adventurer = User.find(params[:adventurer])
     @quest.status     = :closed
     @quest.save!
