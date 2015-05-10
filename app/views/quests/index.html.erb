@@ -22,7 +22,7 @@
 <table class="table table-striped">
     <tr>
       <th><%= sort_link @search, :questgiver, "Questgiver" %></th>
-      <th><%= sort_link @search, :adventurer, "Adventurer" %></th>
+      <!-- <th><%= sort_link @search, :adventurer, "Adventurer" %></th> -->
       <th><%= sort_link @search, :title, "Title" %></th>
       <th><%= sort_link @search, :price, "Price" %></th>
       <th><%= sort_link @search, :description, "Description" %></th>
@@ -34,7 +34,7 @@
     <% @quests.each do |quest| %>
       <tr>
         <td><%= quest.questgiver.username %></td>
-        <td><%= quest.adventurer.present? ? quest.adventurer.username : '' %></td>
+        <!-- <td><%= quest.adventurer.present? ? quest.adventurer.username : '' %></td> -->
         <td><%= quest.title %></td>
         <td><%= quest.price %></td>
         <td><%= quest.description %></td>

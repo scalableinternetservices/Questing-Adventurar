@@ -20,6 +20,8 @@
       </tr>
       <% end %>
     </div>
+
+
     <div role="tabpanel" class="tab-pane" id="accepted">
       <table class="table">
         <thead>
@@ -34,7 +36,7 @@
         </thead>
 
         <tbody>
-          <% current_user.quests_accepted.where("status < 2").each do |quest| %>
+          <% current_user.quests_accepted.where("status < 3").each do |quest| %>
             <tr>
               <td><%= quest.questgiver.username %></td>
               <td><%= quest.title %></td>
