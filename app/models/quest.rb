@@ -13,7 +13,7 @@ class Quest < ActiveRecord::Base
   enum status: [ :open, :closed, :success, :failure ]
 
   acts_as_taggable # Alias for acts_as_taggable_on :tags
-  acts_as_taggable_on :skills, :interests
+  
 
 # 	def self.search(search)
 # 	  if search

@@ -8,10 +8,15 @@ class QuestsController < ApplicationController
 
 
   def index
-
-    @search = Quest.search(params[:q])
-    # @search = Quest.search(questgiver_id_not_eq: current_user.id, adventurer_id_blank: '1')
-    @quests = @search.result.paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
+    if params[:tag]
+      @search = Quest.search(params[:q])
+      @quests = Quest.tagged_with(params[:tag]).paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
+    else
+      @search = Quest.search(params[:q])
+      # @search = Quest.search(questgiver_id_not_eq: current_user.id, adventurer_id_blank: '1')
+      @quests = @search.result.paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
+    end
+    
 
   end
 
