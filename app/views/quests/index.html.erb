@@ -18,6 +18,12 @@
   <div class="actions"><%= f.submit "Search" %></div>
 <% end %>
 
+<div id="tag_cloud">
+  <% tag_cloud Quest.tag_counts, %w[s m l] do |tag, css_class| %>
+    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+  <% end %>
+</div>
+
 <br />
 <table class="table table-striped">
     <tr>
