@@ -1,5 +1,5 @@
 class Quest < ActiveRecord::Base
-  validates :questgiver, :title, :price, :description,
+  validates :title, :price, :description,
             :post_time, :expiration_time, presence: true
   validates :price, numericality: {greater_than_or_equal_to: 0.01}
   
@@ -11,7 +11,7 @@ class Quest < ActiveRecord::Base
            source: :user, dependent: :destroy
   has_one :review, class_name: 'Review', foreign_key: :quest_id
 
-  enum status: [ :open, :accepted, :complete, :success, :failure ]
+  enum status: [:open, :accepted, :complete, :success, :failure]
 
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 

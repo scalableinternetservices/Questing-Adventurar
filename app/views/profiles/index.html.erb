@@ -36,7 +36,7 @@
         </thead>
 
         <tbody>
-          <% current_user.quests_accepted.where("status < 3").each do |quest| %>
+          <% current_user.quests_accepted.where("status <= ?", Quest.statuses[:complete]).each do |quest| %>
             <tr>
               <td><%= quest.questgiver.username %></td>
               <td><%= quest.title %></td>
@@ -94,11 +94,10 @@
               <td><%= time_ago_in_words(quest.post_time) %></td>
               <td><%= time_ago_in_words(quest.expiration_time) %></td>
               <td class="text-right">
-                <%= link_to new_review_path(param: {quest_id: quest.id, questgiver_id: quest.questgiver_id, adventurer_id: quest.adventurer_id}), class: "btn btn-default" do %>
-                  <span class="glyphicon glyphicon-chevron-right"></span>
+                <%= link_to new_review_path(param: {quest_id: quest.id, questgiver_id: quest.questgiver_id, adventurer_id: quest.adventurer_id}), class: "btn btn-info" do %>
+                  <span class="glyphicon glyphicon-thumbs-up"></span>
+                  <span class="glyphicon glyphicon-thumbs-down"></span>
                 <% end %>
-              </td>
-              <td class="text-right">
                 <%= link_to quest_path(quest), class: "btn btn-default" do %>
                   <span class="glyphicon glyphicon-chevron-right"></span>
                 <% end %>
@@ -117,23 +116,27 @@
             <th>Price</th>
             <th>Description</th>
             <th>Post time</th>
-            <th>Expiration time</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
 
         <tbody>
-          <% current_user.quests_accepted.where("status >= 2").each do |quest| %>
+          <% current_user.quests_accepted.where("status >= ?", Quest.statuses[:success]).each do |quest| %>
             <tr>
               <td><%= quest.questgiver.username %></td>
               <td><%= quest.title %></td>
               <td><%= quest.price %></td>
               <td><%= quest.description %></td>
               <td><%= time_ago_in_words(quest.post_time) %></td>
-              <td><%= time_ago_in_words(quest.expiration_time) %></td>
               <td class="text-right">
-                <%= link_to quest_path(quest), class: "btn btn-default" do %>
-                  <span class="glyphicon glyphicon-chevron-right"></span>
+                <% if quest.success? %>
+                  <%= link_to quest_path(quest), class: "btn btn-success" do %>
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                  <% end %>
+                <% else %>
+                  <%= link_to quest_path(quest), class: "btn btn-danger" do %>
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                  <% end %>
                 <% end %>
               </td>
             </tr>
