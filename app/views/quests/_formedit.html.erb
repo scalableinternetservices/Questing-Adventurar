@@ -15,10 +15,12 @@
     <%= f.label :questgiver_id %><br>
     <%= @quest.questgiver.username %>
   </div>
-  <div class="field">
-    <%= f.label :adventurer_id %><br>
-    <%= @quest.adventurer.username %>
-  </div>
+  <% if @quest.adventurer %>
+    <div class="field">
+      <%= f.label :adventurer_id %><br>
+      <%= @quest.adventurer.username %>
+    </div>
+  <% end %>
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>

@@ -40,7 +40,7 @@ class QuestsController < ApplicationController
   def accept
     Pending.delete_all(quest_id: @quest.id)
     @quest.adventurer = User.find(params[:adventurer])
-    @quest.status     = :accepted
+    @quest.accepted!
     @quest.save!
 
     redirect_to :back, notice: 'Pending adventurer accepted!'
@@ -50,9 +50,9 @@ class QuestsController < ApplicationController
   def complete
     puts "I'm currently working with #{@quest}"
     if params[:s] == "true"
-      @quest.status = :complete
+      @quest.complete!
     elsif params[:s] == "false"
-      @quest.status = :failure
+      @quest.failure!
     end
 
     @quest.save!
@@ -63,7 +63,7 @@ class QuestsController < ApplicationController
   # POST /quests.json
   def create
     @quest = Quest.new(quest_params)
-
+    @quest.questgiver = current_user
     respond_to do |format|
       if @quest.save
         format.html { redirect_to @quest, notice: 'Quest was successfully created.' }
