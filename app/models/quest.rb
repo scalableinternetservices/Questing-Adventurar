@@ -14,5 +14,4 @@ class Quest < ActiveRecord::Base
   enum status: [:open, :accepted, :complete, :success, :failure]
 
   acts_as_taggable # Alias for acts_as_taggable_on :tags
-
 end
