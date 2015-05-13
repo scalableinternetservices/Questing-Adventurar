@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511073712) do
+ActiveRecord::Schema.define(version: 20150513150933) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id",  limit: 4
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20150511073712) do
     t.string   "description",     limit: 255
     t.datetime "post_time"
     t.datetime "expiration_time"
-    t.integer  "status",          limit: 4
+    t.integer  "status",          limit: 4,                  default: 0
   end
 
   add_index "quests", ["adventurer_id"], name: "fk_rails_6f9b60add0", using: :btree
