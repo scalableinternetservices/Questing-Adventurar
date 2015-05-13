@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150510080932) do
+ActiveRecord::Schema.define(version: 20150511073712) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id",  limit: 4
@@ -45,6 +45,9 @@ ActiveRecord::Schema.define(version: 20150510080932) do
     t.string  "gender",            limit: 255
     t.decimal "questgiver_rating",             precision: 10
     t.decimal "adventurer_rating",             precision: 10
+    t.string  "address",           limit: 255
+    t.float   "latitude",          limit: 24
+    t.float   "longitude",         limit: 24
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree

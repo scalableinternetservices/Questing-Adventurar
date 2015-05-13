@@ -10,6 +10,7 @@ ryan_profile:
   first_name: Ryan
   last_name: Dai
   gender: Male
+  address: "400 Gayley Avenue, Los Angeles, CA 90024"
   questgiver_rating: 3.0
   adventurer_rating: 4.0
 

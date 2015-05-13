@@ -42,6 +42,10 @@
       <%= profile_form.label :gender %><br>
       <%= profile_form.select(:gender, [['Male', 'Male'], ['Female', 'Female']]) %>
     </div>
+    <div class="field">
+      <%= profile_form.label :address %><br>
+      <%= profile_form.text_field :address %>
+    </div>
   <% end %>
 
   <div class="actions">
