@@ -40,6 +40,7 @@ class QuestsController < ApplicationController
   def accept
     Pending.delete_all(quest_id: @quest.id)
     @quest.adventurer = User.find(params[:adventurer])
+    @quest.create_activity :accept, owner: current_user, recipient: @quest.adventurer
     @quest.accepted!
     @quest.save!
 
@@ -49,6 +50,7 @@ class QuestsController < ApplicationController
   # POST /quests/complete
   def complete
     puts "I'm currently working with #{@quest}"
+    @quest.create_activity :complete, owner: current_user, recipient: @quest.questgiver
     if params[:s] == "true"
       @quest.complete!
     elsif params[:s] == "false"
@@ -66,6 +68,7 @@ class QuestsController < ApplicationController
     @quest.questgiver = current_user
     respond_to do |format|
       if @quest.save
+        # @quest.create_activity :create, owner: current_user, recipient: @quest.questgiver
         format.html { redirect_to @quest, notice: 'Quest was successfully created.' }
         format.json { render :show, status: :created, location: @quest }
       else
@@ -81,8 +84,11 @@ class QuestsController < ApplicationController
   def update
     respond_to do |format|
       if @quest.update(quest_params)
-        format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
-        format.json { render :show, status: :ok, location: @quest }
+        if @quest.adventurer # let the adventurer know the quest has been updated
+          @quest.create_activity :update, owner: current_user, recipient: @quest.adventurer
+        end
+          format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
+          format.json { render :show, status: :ok, location: @quest }
       else
         format.html { render :edit }
         format.json { render json: @quest.errors, status: :unprocessable_entity }
@@ -94,6 +100,7 @@ class QuestsController < ApplicationController
   # DELETE /quests/1.json
   def destroy
     @quest.destroy
+    # @quest.create_activity :destroy, owner: current_user
     respond_to do |format|
       format.html { redirect_to quests_url, notice: 'Quest was successfully destroyed.' }
       format.json { head :no_content }
