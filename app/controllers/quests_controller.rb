@@ -49,7 +49,6 @@ class QuestsController < ApplicationController
 
   # POST /quests/complete
   def complete
-    puts "I'm currently working with #{@quest}"
     if params[:s] == "true"
       @quest.complete!
     elsif params[:s] == "false"
