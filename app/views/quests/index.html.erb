@@ -1,19 +1,21 @@
+<%= link_to new_quest_path, class: "btn btn-success pull-right" do %><span class="glyphicon glyphicon-plus"></span><% end %>
 <h1>Quest Board</h1>
 
 <%= will_paginate @quests if false%>
 <%= search_form_for @search do |f| %>
   <div class="field">
-    <!-- NEED IMPROVEMENT -->
-    <%= f.label :title_or_description_cont_any, "Keywords  " %>
-    <%= f.text_field :title_or_description_cont_any, size: 20 %>
+    <%= f.label :title_or_description_cont_any, "I'm looking for " %>
+    <%= f.text_field :title_or_description_cont_any, size: 20, placeholder: "adventure" %>
   </div>
   <div class="field">
-    <%= f.label :price_gteq, "Price between" %>
+    <%= f.label :price_gteq, "With bounty between" %>
     <%= f.text_field :price_gteq, size: 5 %>
     <%= f.label :price_lteq, "and" %>
     <%= f.text_field :price_lteq, size: 5 %>
-    <!-- <input type="hidden" name="q[adventurer_id_blank]" id="q_adventurer_id_blank" value = '1'> -->
-    <!-- <input type="hidden" name="q[questgiver_id_not_eq]" id="q_questgiver_id_not_eq" value = <%= current_user.id%>> -->
+  </div>
+  <div class="field">
+    <%= label_tag :within %>
+    <%= text_field_tag :within, params[:within], placeholder: "distance" %>
   </div>
   <div class="actions"><%= f.submit "Search" %></div>
 <% end %>
@@ -28,24 +30,24 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Questgiver</th>
       <th><%= sort_link @search, :title, "Title" %></th>
       <th><%= sort_link @search, :price, "Price" %></th>
       <th><%= sort_link @search, :description, "Description" %></th>
       <th><%= sort_link @search, :post_time, "Post time" %></th>
       <th><%= sort_link @search, :expiration_time, "Expiration time" %></th>
-      <th>Questgiver</th>
       <th>&nbsp;</th>
     </tr>
   </thead>
   <tbody>
     <% @quests.each do |quest| %>
       <tr>
+        <td><%= quest.questgiver.username %></td>
         <td><%= quest.title %></td>
         <td><%= quest.price %></td>
         <td><%= quest.description %></td>
         <td><%= time_ago_in_words(quest.post_time) %></td>
         <td><%= time_ago_in_words(quest.expiration_time) %></td>
-        <td><%= quest.questgiver.username %></td>
         <td class="text-right">
           <%= link_to quest, class: "btn btn-default" do %>
             <span class="glyphicon glyphicon-chevron-right"></span>
@@ -58,5 +60,3 @@
 
 <br />
 <%= will_paginate @collection, renderer: BootstrapPagination::Rails %>
-
-<%= link_to 'New Quest', new_quest_path %>

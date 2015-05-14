@@ -8,18 +8,19 @@ class QuestsController < ApplicationController
 
 
   def index
-    if params[:tag]
-      @search = Quest.search(params[:q])
-      @quests = @search.result.tagged_with(params[:tag]).paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
-      # @quests = Quest.tagged_with(params[:tag]).paginate(per_page: 10, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
-    else
-      @search = Quest.search(params[:q])
-      # @search = Quest.search(questgiver_id_not_eq: current_user.id, adventurer_id_blank: '1')
-      # @quests = @search.result.paginate(per_page: 10, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
-      @quests = @search.result.paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
+    @search = Quest.search(params[:q])
+    @quests = @search.result.paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
+
+    if params[:within].present? && (params[:within].to_i > 0)
+      # Location
+      @nearby_users = current_user.profile.nearbys(params[:within]).select(:user_id).map(&:user_id)
+      @quests = @quests.where(questgiver: @nearby_users)
     end
     
-
+    if params[:tag]
+      # Tag
+      @quests = @quests.tagged_with(params[:tag]).where(adventurer: nil)
+    end
   end
 
   # GET /quests/1
@@ -48,7 +49,6 @@ class QuestsController < ApplicationController
 
   # POST /quests/complete
   def complete
-    puts "I'm currently working with #{@quest}"
     if params[:s] == "true"
       @quest.complete!
     elsif params[:s] == "false"
