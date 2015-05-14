@@ -74,7 +74,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Questgiver</th>
+            <th>Adventurer</th>
             <th>Title</th>
             <th>Price</th>
             <th>Description</th>
@@ -87,7 +87,7 @@
         <tbody>
           <% current_user.quests_posted.each do |quest| %>
             <tr>
-              <td><%= quest.questgiver.username %></td>
+              <td><%= quest.adventurer.username if quest.adventurer %></td>
               <td><%= quest.title %></td>
               <td><%= quest.price %></td>
               <td><%= quest.description %></td>
