@@ -43,9 +43,14 @@
         <td><%= quest.title %></td>
         <td><%= quest.price %></td>
         <td><%= quest.description %></td>
-        <td><%= time_ago_in_words(quest.post_time) %></td>
-        <td><%= time_ago_in_words(quest.expiration_time) %></td>
-        <td><%= quest.questgiver.username %></td>
+        <td><%= time_ago_in_words(quest.post_time) %> ago</td>
+              <% if quest.expiration_time < Time.now %>
+              <td> <font color = "red"> Expired <%= time_ago_in_words(quest.expiration_time) %> ago!</font> </td>
+              <% else %>
+              <td>in <%= time_ago_in_words(quest.expiration_time) %>
+              <% end %>
+              </td>
+        <td><%= link_to quest.questgiver.username, quest.questgiver.profile %></td>
         <td class="text-right">
           <%= link_to quest, class: "btn btn-default" do %>
             <span class="glyphicon glyphicon-chevron-right"></span>

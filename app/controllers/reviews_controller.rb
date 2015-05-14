@@ -28,6 +28,7 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
+        @review.create_activity :create, owner: current_user, recipient: @review.adventurer
         format.html { redirect_to @review, notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else

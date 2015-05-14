@@ -15,6 +15,11 @@ class Quest < ActiveRecord::Base
 
   enum status: [:open, :accepted, :complete, :success, :failure]
 
+  before_save :default_values
+  def default_values
+    self.status ||= :open
+  end
+
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
 end
