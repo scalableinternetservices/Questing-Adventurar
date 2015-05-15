@@ -16,7 +16,7 @@
         <tr>
           <td><%= quest.questgiver.username %></td>
           <td><%= quest.title %></td>
-          <td><%= quest.price %></td>
+          <td><%= number_to_currency(quest.price) %></td>
           <td><%= quest.description %></td>
           <td>in <%= time_ago_in_words(quest.expiration_time) %></td>
         </tr>
