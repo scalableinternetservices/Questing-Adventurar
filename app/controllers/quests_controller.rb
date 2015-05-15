@@ -5,7 +5,7 @@ class QuestsController < ApplicationController
   # GET /quests
   # GET /quests.json
   def index
-    if params[:q]
+    if params[:q] and params[:q][:title_or_description_cont_any]
       params[:q][:title_or_description_cont_any] = params[:q][:title_or_description_cont_any].split(" ")
     end
 
