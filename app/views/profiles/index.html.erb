@@ -33,6 +33,13 @@
           </tbody>
         </table>
       <% end %>
+      <%= render_activities @activities %>
+<!--        <% current_user.reviews.each do |review| %>
+      <tr>
+        <td> <%= review.rating %></td>
+        <td> <%= review.comment %></td>
+      </tr>
+      <% end %> -->
     </div>
 
 
@@ -40,11 +47,11 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Questgiver</th>
             <th>Title</th>
             <th>Price</th>
             <th>Description</th>
             <th>Expiration time</th>
+            <th>Questgiver</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -52,11 +59,12 @@
         <tbody>
           <% current_user.quests_accepted.where("status <= ?", Quest.statuses[:complete]).each do |quest| %>
             <tr class="<%= quest.complete? ? "info" : "" %>">
-              <td><%= quest.questgiver.username %></td>
-              <td><%= quest.title %></td>
+              <td><%= link_to quest.title, quest %></td>
               <td><%= quest.price %></td>
               <td><%= quest.description %></td>
               <td>in <%= time_ago_in_words(quest.expiration_time) %></td>
+              <td><%= link_to quest.questgiver.username, quest.questgiver.profile %>&nbsp;
+                <%= quest.questgiver.phone_numbers if quest.questgiver.phone_numbers.exists?%></td>
               <td class="text-right">
                 <% if !quest.complete? %>
                   <%= link_to complete_quests_path(id: quest, s: true), method: :post, class: "btn btn-success" do %>
@@ -71,16 +79,16 @@
           <% end %>
           <% current_user.pendings.each do |pq| %>
             <tr class="active">
-              <td><%= pq.quest.questgiver.username %></td>
-              <td><%= pq.quest.title %></td>
+              <td><%= link_to pq.quest.title, pq.quest %></td>
               <td><%= pq.quest.price %></td>
               <td><%= pq.quest.description %></td>
               <% if pq.quest.expiration_time < Time.now %>
-              <td> <font color = "red"> Expired <%= time_ago_in_words(pq.quest.expiration_time) %> ago!</font> </td>
+              <td class="text-danger">expired <%= time_ago_in_words(pq.quest.expiration_time) %> ago!</font> </td>
               <% else %>
               <td>in <%= time_ago_in_words(pq.quest.expiration_time) %>
               <% end %>
               </td>
+              <td><%= link_to pq.quest.questgiver.username, pq.quest.questgiver.profile %></td>
               <td class="text-right">
                 <%= link_to pending_path(pq), method: :delete, class: "btn btn-danger" do %>
                   <span class="glyphicon glyphicon-remove"></span>
@@ -95,12 +103,11 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Adventurer</th>
             <th>Title</th>
             <th>Price</th>
             <th>Description</th>
-            <th>Post time</th>
             <th>Expiration time</th>
+            <th>Adventurer</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -108,17 +115,17 @@
         <tbody>
           <% current_user.quests_posted.each  do |quest|%>
             <tr>
-              <td><%= quest.adventurer.username if quest.adventurer %></td>
-              <td><%= quest.title %></td>
+              <td><%= link_to quest.title, quest %></td>
               <td><%= quest.price %></td>
               <td><%= quest.description %></td>
-              <td><%= time_ago_in_words(quest.post_time) %> ago</td>
               <% if quest.expiration_time < Time.now %>
-              <td> <font color = "red"> Expired <%= time_ago_in_words(quest.expiration_time) %> ago!</font> </td>
+              <td class="text-danger">expired <%= time_ago_in_words(quest.expiration_time) %> ago!</font> </td>
               <% else %>
               <td>in <%= time_ago_in_words(quest.expiration_time) %>
               <% end %>
               </td>
+              <td><%= link_to quest.adventurer.username, quest.adventurer.profile if quest.adventurer %>&nbsp;
+                <%= quest.questgiver.phone_numbers if quest.questgiver.phone_numbers.exists?%></td>
               <td class="text-right">
                 <% if quest.complete? %>
                 <%= link_to new_review_path(param: {quest_id: quest.id, questgiver_id: quest.questgiver_id, adventurer_id: quest.adventurer_id}), class: "btn btn-info" do %>
@@ -138,12 +145,12 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Questgiver</th>
             <th>Title</th>
             <th>Price</th>
             <th>Description</th>
             <th>Post time</th>
             <th>Review</th>
+            <th>Questgiver</th>
             <th>&nbsp;</th>
           </tr> 
         </thead>
@@ -151,12 +158,12 @@
         <tbody>
           <% current_user.quests_accepted.where("status >= ?", Quest.statuses[:complete]).each do |quest| %>
             <tr>
-              <td><%= quest.questgiver.username %></td>
               <td><%= quest.title %></td>
               <td><%= quest.price %></td>
               <td><%= quest.description %></td>
               <td><%= time_ago_in_words(quest.post_time) %></td>
               <td><%= link_to quest.review.rating, quest.review if quest.review %></td>
+              <td><%= link_to quest.questgiver.username, quest.questgiver.profile %></td>
               <td class="text-right">
                 <% if quest.success? %>
                   <%= link_to quest_path(quest), class: "btn btn-success" do %>

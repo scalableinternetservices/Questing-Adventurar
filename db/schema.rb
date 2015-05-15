@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150514185457) do
+ActiveRecord::Schema.define(version: 20150515045338) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -74,11 +74,11 @@ ActiveRecord::Schema.define(version: 20150514185457) do
     t.integer  "questgiver_id",   limit: 4
     t.integer  "adventurer_id",   limit: 4
     t.string   "title",           limit: 255
-    t.decimal  "price",                       precision: 10
+    t.decimal  "price",                       precision: 10, scale: 2
     t.string   "description",     limit: 255
     t.datetime "post_time"
     t.datetime "expiration_time"
-    t.integer  "status",          limit: 4,                  default: 0
+    t.integer  "status",          limit: 4,                            default: 0
   end
 
   add_index "quests", ["adventurer_id"], name: "fk_rails_6f9b60add0", using: :btree

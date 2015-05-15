@@ -2,9 +2,7 @@
 <% if activity.trackable %>
 	<span class="glyphicon glyphicon-star"></span>
   	<small class="text-muted"><%= a.created_at.strftime('%H:%M:%S %-d %B %Y') %></small><br/>
-	<%= activity.owner.username if activity.owner %> has chosen you for a quest!
-	<%= link_to activity.owner.username, activity.owner.profile %>
-	Brave adventurer, <%= activity.recipient.username %>! Begin your quest:
+	<%= link_to activity.owner.username, activity.owner.profile if activity.owner %> has chosen you for a quest, brave adventurer <strong><%= activity.recipient.username %></strong>! Begin your quest:
   <%= link_to activity.trackable.title, activity.trackable %> 
 <% else %>
 	<span class="glyphicon glyphicon-remove-sign"></span>
