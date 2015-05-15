@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
+    @activities = PublicActivity::Activity.order("created_at desc").where(recipient_id: current_user)
   end
 
   # GET /profiles/1

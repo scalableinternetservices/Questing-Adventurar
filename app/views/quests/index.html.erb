@@ -28,21 +28,29 @@
 
 <br />
 <table class="table table-striped">
+  <colgroup>
+    <col class="col-md-2">
+    <col class="col-md-1">
+    <col class="col-md-3">
+    <col class="col-md-2">
+    <col class="col-md-2">
+    <col class="col-md-1">
+    <col class="col-md-1">
+  </colgroup>
   <thead>
     <tr>
-      <th>Questgiver</th>
       <th><%= sort_link @search, :title, "Title" %></th>
       <th><%= sort_link @search, :price, "Price" %></th>
       <th><%= sort_link @search, :description, "Description" %></th>
       <th><%= sort_link @search, :post_time, "Post time" %></th>
       <th><%= sort_link @search, :expiration_time, "Expiration time" %></th>
+      <th>Questgiver</th>
       <th>&nbsp;</th>
     </tr>
   </thead>
   <tbody>
     <% @quests.each do |quest| %>
       <tr>
-        <td><%= quest.questgiver.username %></td>
         <td><%= quest.title %></td>
         <td><%= quest.price %></td>
         <td><%= quest.description %></td>
