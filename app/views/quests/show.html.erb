@@ -47,7 +47,7 @@
 </p>
 <% else %>
 <p>
-  <strong>Pending adventurers!</strong>
+  <strong><%= Pending adventurers! if @quest.pendings.present?%></strong>
   <table>
   <% if @quest.pendings.present? %>
     <thead>
@@ -59,7 +59,7 @@
     <tbody>
         <% @quest.pendings.each do |pending| %>
           <tr>
-            <td><%= pending.user.username %></td>
+            <td><%= link_to pending.user.username, pending.user.profile  %></td>
             <% if current_user == @quest.questgiver %>
                 <td><%= link_to 'Accept', accept_quests_path(id: @quest.id, adventurer: pending.user_id), method: :post %></td>
                 <td><%= link_to 'Reject', pending, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -68,7 +68,7 @@
         <% end %>
     </tbody>
   <% else %>
-      <p> No pending adventurers! </p>
+      <strong> No pending adventurers! </strong>
   <% end %>
 </table>
 </p>
@@ -82,4 +82,4 @@
 <% if current_user == @quest.questgiver %>
   <%= link_to 'Edit', edit_quest_path(@quest) %> |
 <% end %>
-<%= link_to 'Back', quests_path %>
+<%= link_to "Back", :back %>
