@@ -90,21 +90,13 @@ ActiveRecord::Schema.define(version: 20150515022244) do
     t.integer  "questgiver_id",   limit: 4
     t.integer  "adventurer_id",   limit: 4
     t.string   "title",           limit: 255
-<<<<<<< HEAD
     t.decimal  "price",                       precision: 10, scale: 2
-=======
-    t.decimal  "price",                       precision: 10
->>>>>>> 8cd3985ef91ef8c5eb1e537b147917079f49a79e
     t.string   "description",     limit: 255
     t.datetime "post_time"
     t.datetime "expiration_time"
     t.integer  "status",          limit: 4,                            default: 0
   end
 
-<<<<<<< HEAD
-  add_index "quests", ["adventurer_id"], name: "fk_rails_6f9b60add0", using: :btree
-  add_index "quests", ["questgiver_id"], name: "fk_rails_8d95dd76a6", using: :btree
-=======
   add_index "quests", ["adventurer_id"], name: "fk_rails_ebc9300d3c", using: :btree
   add_index "quests", ["questgiver_id"], name: "fk_rails_371c072cbc", using: :btree
 
@@ -132,7 +124,6 @@ ActiveRecord::Schema.define(version: 20150515022244) do
   end
 
   add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
->>>>>>> 8cd3985ef91ef8c5eb1e537b147917079f49a79e
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "quest_id",      limit: 4
