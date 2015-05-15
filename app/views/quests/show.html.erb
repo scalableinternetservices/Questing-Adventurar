@@ -61,15 +61,14 @@
     <% else %>
         <p> No pending adventurers! </p>
     <% end %>
+    <% if current_user != @quest.questgiver%>
+        <%= button_to 'Let me take the quest!', pendings_path(pending: {quest_id: @quest.id, user_id: current_user.id}) %>
+    <% end %>
   </p>
   <% else %>
     <p>
       <strong>This quest is no longer open. </strong>
     </p>
-  <% end %>
-
-  <% if current_user != @quest.questgiver%>
-    <%= button_to 'Let me take the quest!', pendings_path(pending: {quest_id: @quest.id, user_id: current_user.id}) %>
   <% end %>
 
 <% if current_user == @quest.questgiver %>

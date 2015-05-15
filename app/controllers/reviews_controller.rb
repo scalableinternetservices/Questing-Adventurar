@@ -40,10 +40,10 @@ class ReviewsController < ApplicationController
     @quest.status = 3
 
     # verify that review doesnt already exist
-    @duplicate_review = Review.find_by id: @review.quest_id
+    @duplicate_review = Review.find_by quest_id: @review.quest_id
 
     respond_to do |format|
-      if @duplicate_review
+      if @duplicate_review != nil
         format.html { redirect_to @quest, notice: 'You already submitted a review for this quest!' }
         format.json { render json: @pending.errors, status: :unprocessable_entity }
       elsif @review.save
