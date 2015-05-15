@@ -2,11 +2,8 @@ class QuestsController < ApplicationController
   before_action :set_quest, only: [:show, :edit, :update, :destroy, :accept, :complete]
   before_filter :authenticate_user!
 
-
   # GET /quests
   # GET /quests.json
-
-
   def index
     @search = Quest.search(params[:q])
     @quests = @search.result.paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)

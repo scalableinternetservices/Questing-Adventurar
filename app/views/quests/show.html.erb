@@ -1,65 +1,73 @@
-<p>
-  <strong>Questgiver:</strong>
-  <%= @quest.questgiver.username %>
-</p>
+<div class="col-md-12 text-right">
+  <% if current_user == @quest.questgiver %>
+  <%= link_to 'Edit', edit_quest_path(@quest), class: "btn btn-info" %>
+  <% elsif @quest.open? %>
+  <%= link_to 'Let me take the quest!', pendings_path(pending: {quest_id: @quest.id, user_id: current_user.id}), method: :post, class: "btn btn-success" %>
+  <% end %>
+</div>
 
-<% if @quest.adventurer %>
-<p>
-  <strong>Adventurer:</strong>
-  <%= @quest.adventurer.username %>
-</p>
-<% end %>
+<div class="col-md-6">
+  <table class="table">
+    <thead>
+      <th><h1>Quest</h1></th>
+      <th>&nbsp;</th>
+    </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Questgiver</th>
+      <td><%= @quest.questgiver.username %></td>
+    </tr>
+    <% if @quest.adventurer %>
+    <tr>
+      <th scope="row">Adventurer</th>
+      <td><%= @quest.adventurer.username %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <th scope="row">Title</th>
+      <td><%= @quest.title %></td>
+    </tr>
+    <tr>
+      <th scope="row">Price</th>
+      <td><%= number_to_currency @quest.price %></td>
+    </tr>
+    <tr>
+      <th scope="row">Description</th>
+      <td><%= @quest.description %></td>
+    </tr>
+    <tr>
+      <th scope="row">Tags</th>
+      <td><%= raw @quest.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></td>
+    </tr>
+    <tr>
+      <th scope="row">Post time</th>
+      <td><%= @quest.post_time %></td>
+    </tr>
+    <tr>
+      <th scope="row">Expiration time</th>
+      <td><%= @quest.expiration_time %></td>
+    </tr>
+  </tbody>
+  </table>
+</div>
 
+<div class="col-md-6">
+<% if not @quest.open? %>
 <p>
-  <strong>Title:</strong>
-  <%= @quest.title %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @quest.price %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @quest.description %>
-</p>
-
-<p>
-  <strong>Tags:</strong>
-  <%= raw @quest.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
-</p>
-
-
-<p>
-  <strong>Post time:</strong>
-  <%= @quest.post_time %>
-</p>
-
-<p>
-  <strong>Expiration time:</strong>
-  <%= @quest.expiration_time %>
-</p>
-
-<% if not @quest.status.eql? "open" %>
-<p>
-  <strong>This quest is no longer open. </strong>
+  <strong>This quest is no longer open.</strong>
 </p>
 <% else %>
-<p>
-  <strong><%= Pending adventurers! if @quest.pendings.present?%></strong>
-  <table>
+  <!-- <strong><%= "Pending adventurers!" if @quest.pendings %></strong> -->
+  <table class="table">
   <% if @quest.pendings.present? %>
     <thead>
-      <tr>
-        <th>User</th>
-      </tr>
+      <th>Pending Adventurers</th>
+      <th><h1>&nbsp;</h1></th>
     </thead>
-
     <tbody>
         <% @quest.pendings.each do |pending| %>
           <tr>
-            <td><%= link_to pending.user.username, pending.user.profile  %></td>
+            <td><%= link_to pending.user.username, pending.user.profile %></td>
             <% if current_user == @quest.questgiver %>
                 <td><%= link_to 'Accept', accept_quests_path(id: @quest.id, adventurer: pending.user_id), method: :post %></td>
                 <td><%= link_to 'Reject', pending, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -71,15 +79,5 @@
       <strong> No pending adventurers! </strong>
   <% end %>
 </table>
-</p>
-
-<% if current_user != @quest.questgiver %>
-  <%= button_to 'Let me take the quest!', pendings_path(pending: {quest_id: @quest.id, user_id: current_user.id}) %>
+</div>
 <% end %>
-
-<% end %>
-
-<% if current_user == @quest.questgiver %>
-  <%= link_to 'Edit', edit_quest_path(@quest) %> |
-<% end %>
-<%= link_to "Back", :back %>
