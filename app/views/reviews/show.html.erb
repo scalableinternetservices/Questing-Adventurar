@@ -7,17 +7,17 @@
 
 <p>
   <strong>Quest:</strong>
-  <%= @review.quest %>
+  <%= @review.quest.title %>
 </p>
 
 <p>
   <strong>Questgiver:</strong>
-  <%= @review.questgiver %>
+  <%= @review.questgiver.username %>
 </p>
 
 <p>
   <strong>Adventurer:</strong>
-  <%= @review.adventurer %>
+  <%= @review.adventurer.username %>
 </p>
 
 <p>
@@ -30,5 +30,4 @@
   <%= @review.post_time %>
 </p>
 
-<%= link_to 'Edit', edit_review_path(@review) %> |
 <%= link_to 'Back', reviews_path %>

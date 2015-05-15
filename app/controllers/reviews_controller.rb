@@ -43,13 +43,14 @@ class ReviewsController < ApplicationController
     @duplicate_review = Review.find_by id: @review.quest_id
 
     respond_to do |format|
-      if !@duplicate_review
+      if @duplicate_review
         format.html { redirect_to @quest, notice: 'You already submitted a review for this quest!' }
         format.json { render json: @pending.errors, status: :unprocessable_entity }
       elsif @review.save
         @adventurer_profile.save!
         @quest.save!;
-        format.html { redirect_to :back, notice: 'Review was successfully created.' }
+        @review.create_activity :create, owner: current_user, recipient: @review.adventurer
+        format.html { redirect_to @review, notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }

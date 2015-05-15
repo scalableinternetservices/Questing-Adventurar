@@ -8,18 +8,19 @@ class QuestsController < ApplicationController
 
 
   def index
-    if params[:tag]
-      @search = Quest.search(params[:q])
-      @quests = @search.result.tagged_with(params[:tag]).paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
-      # @quests = Quest.tagged_with(params[:tag]).paginate(per_page: 10, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
-    else
-      @search = Quest.search(params[:q])
-      # @search = Quest.search(questgiver_id_not_eq: current_user.id, adventurer_id_blank: '1')
-      # @quests = @search.result.paginate(per_page: 10, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
-      @quests = @search.result.paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
+    @search = Quest.search(params[:q])
+    @quests = @search.result.paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
+
+    if params[:within].present? && (params[:within].to_i > 0)
+      # Location
+      @nearby_users = current_user.profile.nearbys(params[:within]).select(:user_id).map(&:user_id)
+      @quests = @quests.where(questgiver: @nearby_users)
     end
     
-
+    if params[:tag]
+      # Tag
+      @quests = @quests.tagged_with(params[:tag]).where(adventurer: nil)
+    end
   end
 
   # GET /quests/1
@@ -40,6 +41,7 @@ class QuestsController < ApplicationController
   def accept
     Pending.delete_all(quest_id: @quest.id)
     @quest.adventurer = User.find(params[:adventurer])
+    @quest.create_activity :accept, owner: current_user, recipient: @quest.adventurer
     @quest.accepted!
     @quest.save!
 
@@ -49,6 +51,7 @@ class QuestsController < ApplicationController
   # POST /quests/complete
   def complete
     puts "I'm currently working with #{@quest}"
+    @quest.create_activity :complete, owner: current_user, recipient: @quest.questgiver
     if params[:s] == "true"
       @quest.complete!
     elsif params[:s] == "false"
@@ -66,6 +69,7 @@ class QuestsController < ApplicationController
     @quest.questgiver = current_user
     respond_to do |format|
       if @quest.save
+        # @quest.create_activity :create, owner: current_user, recipient: @quest.questgiver
         format.html { redirect_to @quest, notice: 'Quest was successfully created.' }
         format.json { render :show, status: :created, location: @quest }
       else
@@ -81,8 +85,11 @@ class QuestsController < ApplicationController
   def update
     respond_to do |format|
       if @quest.update(quest_params)
-        format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
-        format.json { render :show, status: :ok, location: @quest }
+        if @quest.adventurer # let the adventurer know the quest has been updated
+          @quest.create_activity :update, owner: current_user, recipient: @quest.adventurer
+        end
+          format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
+          format.json { render :show, status: :ok, location: @quest }
       else
         format.html { render :edit }
         format.json { render json: @quest.errors, status: :unprocessable_entity }
@@ -94,6 +101,7 @@ class QuestsController < ApplicationController
   # DELETE /quests/1.json
   def destroy
     @quest.destroy
+    # @quest.create_activity :destroy, owner: current_user
     respond_to do |format|
       format.html { redirect_to quests_url, notice: 'Quest was successfully destroyed.' }
       format.json { head :no_content }

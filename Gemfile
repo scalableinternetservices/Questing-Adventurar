@@ -32,6 +32,8 @@ gem 'devise'
 gem 'will_paginate-bootstrap'
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'ransack', '~> 1.6.6'
+gem 'geocoder'
+gem 'public_activity'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

@@ -1,0 +1,7 @@
+added a quest
+
+<% if activity.trackable and activity.trackable.questgiver%>
+  <%= activity.trackable.questgiver.username %>
+<% else %>
+  which has since been removed
+<% end %>

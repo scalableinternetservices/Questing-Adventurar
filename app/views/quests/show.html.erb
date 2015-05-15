@@ -41,40 +41,41 @@
   <%= @quest.expiration_time %>
 </p>
 
-<% if @quest.adventurer_id == nil %>
-  <p>
-    <strong>Pending adventurers!</strong>
-    <table>
-    <% if @quest.pendings.present? %>
-      <thead>
-        <tr>
-          <th>Users Who Requested the Quest:</th>
-        </tr>
-      </thead>
+  <% if @quest.open? %>
+    <p>
+      <strong>Pending adventurers!</strong>
+      <table>
+      <% if @quest.pendings.present? %>
+        <tbody>
+            <% @quest.pendings.each do |pending| %>
+              <tr>
+                <td><%= pending.user.username %></td>
+                <% if current_user == @quest.questgiver %>
+                    <td><%= link_to 'Accept', accept_quests_path(id: @quest.id, adventurer: pending.user_id), method: :post %></td>
+                    <td><%= link_to 'Reject', pending, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <%end %>
+              </tr>
+            <% end %>
+        </tbody>
+      <% else %>
+          <p> No pending adventurers! </p>
+      <% end %>
+      </table>
+    </p>
 
-      <tbody>
-          <% @quest.pendings.each do |pending| %>
-            <tr>
-              <td><%= pending.user.username %></td>
-              <% if current_user == @quest.questgiver %>
-                  <td><%= link_to 'Accept', accept_quests_path(id: @quest.id, adventurer: pending.user_id), method: :post %></td>
-                  <td><%= link_to 'Reject', pending, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              <%end %>
-            </tr>
-          <% end %>
-      </tbody>
-    <% else %>
-        <p> No pending adventurers! </p>
+    <% if current_user != @quest.questgiver%>
+      <%= button_to 'Let me take the quest!', pendings_path(pending: {quest_id: @quest.id, user_id: current_user.id}) %>
     <% end %>
-  </table>
-  </p>
 
-
-  <% if current_user != @quest.questgiver%>
-    <%= button_to 'Let me take the quest!', pendings_path(pending: {quest_id: @quest.id, user_id: current_user.id}) %>
+  <% else %>
+    <p>
+      <strong>This quest is no longer open. </strong>
+    </p>
   <% end %>
 
-<% end %>
 
-<%= link_to 'Edit', edit_quest_path(@quest) %> |
+
+<% if current_user == @quest.questgiver %>
+  <%= link_to 'Edit', edit_quest_path(@quest) %> |
+<% end %>
 <%= link_to 'Back', quests_path %>

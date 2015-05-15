@@ -10,29 +10,41 @@ ryan_profile:
   first_name: Ryan
   last_name: Dai
   gender: Male
-  questgiver_rating: 0
-  adventurer_rating: 0
+  address: "400 Gayley Avenue, Los Angeles, CA 90024, USA"
+  latitude: 34.0705762
+  longitude: -118.4523361
+  questgiver_rating: 3.0
+  adventurer_rating: 4.0
 
 albert_profile:
   user: albert_user
   first_name: Albert
   last_name: Wong
   gender: Male
-  questgiver_rating: 0
-  adventurer_rating: 0
+  address: "400 Gayley Avenue, Los Angeles, CA 90024, USA"
+  latitude: 34.0705762
+  longitude: -118.4523361
+  questgiver_rating: 3.0
+  adventurer_rating: 2.0
 
 joanna_profile:
   user: joanna_user
   first_name: Joanna
   last_name: Chen
   gender: Female
-  questgiver_rating: 0
-  adventurer_rating: 0
+  address: "940 Tiverton Avenue, Los Angeles, CA 90024, USA"
+  latitude: 34.062702
+  longitude: -118.442301
+  questgiver_rating: 3.0
+  adventurer_rating: 5.0
 
 victor_profile:
   user: victor_user
   first_name: Victor
   last_name: Kwan
   gender: Male
-  questgiver_rating: 0
-  adventurer_rating: 0
+  address: "1609 South Barrington Avenue, Los Angeles, CA 90025, USA"
+  latitude: 34.0420233
+  longitude: -118.454884
+  questgiver_rating: 2.0
+  adventurer_rating: 4.0

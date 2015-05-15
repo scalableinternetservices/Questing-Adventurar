@@ -1,0 +1,9 @@
+<li class="list-group-item">
+pending user added
+
+<% if activity.trackable and activity.trackable.questgiver%>
+  <%= activity.trackable.username %>
+<% else %>
+  which has since been removed
+<% end %>
+</li>
