@@ -36,9 +36,6 @@ class ReviewsController < ApplicationController
 
     @adventurer_profile.num_adventurer_ratings = @adventurer_profile.num_adventurer_ratings+1
 
-    #@adventurer_profile.adventurer_rating = (@adventurer_profile.adventurer_rating*@adventurer_profile.num_adventurer_ratings+5)/(@adventurer_profile.num_adventurer_ratings+1).to_f
-
-
     @quest = Quest.find_by id: @review.quest_id
     @quest.status = 3
 
