@@ -41,6 +41,11 @@
   <%= @quest.expiration_time %>
 </p>
 
+<% if not @quest.status.eql? "open" %>
+<p>
+  <strong>This quest is no longer open. </strong>
+</p>
+<% else %>
 <p>
   <strong>Pending adventurers!</strong>
   <table>
@@ -72,5 +77,9 @@
   <%= button_to 'Let me take the quest!', pendings_path(pending: {quest_id: @quest.id, user_id: current_user.id}) %>
 <% end %>
 
-<%= link_to 'Edit', edit_quest_path(@quest) %> |
+<% end %>
+
+<% if current_user == @quest.questgiver %>
+  <%= link_to 'Edit', edit_quest_path(@quest) %> |
+<% end %>
 <%= link_to 'Back', quests_path %>

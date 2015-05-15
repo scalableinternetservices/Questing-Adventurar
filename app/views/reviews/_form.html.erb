@@ -25,8 +25,7 @@
     <%= f.text_area :comment, rows: 10, cols: 50 %>
   </div>
   <div class="field">
-    <%= f.label :post_time %><br>
-    <%= f.datetime_select :post_time %>
+    <%= f.hidden_field :post_time, :value => Time.now %>
   </div>
   <div class="actions">
     <%= f.submit %>

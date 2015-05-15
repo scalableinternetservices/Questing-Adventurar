@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  get 'activities/index'
+
   devise_for :users, controllers: {registrations: "users/registrations"}
   resources  :pendings
   resources  :quests
   resources  :profiles
   resources  :welcomes
   resources  :reviews
+  resources  :activities
 
   get 'tags/:tag', to: 'quests#index', as: :tag
 
