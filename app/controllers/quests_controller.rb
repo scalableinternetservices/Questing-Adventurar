@@ -5,7 +5,10 @@ class QuestsController < ApplicationController
   # GET /quests
   # GET /quests.json
   def index
-    params[:q][:title_or_description_cont_any] = params[:q][:title_or_description_cont_any].split(" ")
+    if params[:q]
+      params[:q][:title_or_description_cont_any] = params[:q][:title_or_description_cont_any].split(" ")
+    end
+
     @search = Quest.search(params[:q])
     @quests = @search.result.paginate(per_page: 5, page: params[:page]).where(adventurer: nil, status: 0).where.not(questgiver: current_user)
 
