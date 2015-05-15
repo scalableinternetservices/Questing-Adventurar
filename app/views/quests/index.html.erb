@@ -57,7 +57,7 @@
         <td><%= quest.description %></td>
         <td><%= time_ago_in_words(quest.post_time) %> ago</td>
               <% if quest.expiration_time < Time.now %>
-              <td> <font color = "red"> Expired <%= time_ago_in_words(quest.expiration_time) %> ago!</font> </td>
+              <td class="text-danger">expired <%= time_ago_in_words(quest.expiration_time) %> ago!</font> </td>
               <% else %>
               <td>in <%= time_ago_in_words(quest.expiration_time) %>
               <% end %>

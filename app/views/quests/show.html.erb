@@ -52,15 +52,12 @@
 </div>
 
 <div class="col-md-6">
-<% if not @quest.open? %>
-<p>
-  <strong>This quest is no longer open.</strong>
-</p>
-<% else %>
+<% if @quest.open? %>
   <table class="table">
   <% if @quest.pendings.present? %>
     <thead>
       <th>Pending Adventurers</th>
+      <th><h1>&nbsp;</h1></th>
       <th><h1>&nbsp;</h1></th>
     </thead>
     <tbody>
@@ -75,7 +72,5 @@
         <% end %>
     </tbody>
   </table>
-  <% else %>
-    <p> No pending adventurers! </p>
   <% end %>
 <% end %>

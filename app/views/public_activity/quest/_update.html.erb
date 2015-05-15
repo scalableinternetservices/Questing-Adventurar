@@ -1,13 +1,13 @@
 <li class="list-group-item">
 <% if activity.trackable %>
 	<span class="glyphicon glyphicon-pencil"></span>
-  	<small class="text-muted"><%= a.created_at.strftime('%H:%M:%S %-d %B %Y') %></small><br/>
+  	<small class="text-muted text-uppercase"><%= a.created_at.strftime('%H:%M:%S %-d %B %Y') %></small><br/>
 	<%= activity.owner.username if activity.owner %> has edited a quest you're on!
 	Check out the new details:
   <%= link_to activity.trackable.title, activity.trackable %> 
 <% else %>
 	<span class="glyphicon glyphicon-remove-sign"></span>
-  	<small class="text-muted"><%= a.created_at.strftime('%H:%M:%S %-d %B %Y') %></small><br/>
+  	<small class="text-muted text-uppercase"><%= a.created_at.strftime('%H:%M:%S %-d %B %Y') %></small><br/>
   It appears this quest no longer exists!
 <% end %>
 </li>

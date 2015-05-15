@@ -6,7 +6,7 @@ class QuestsController < ApplicationController
   # GET /quests.json
   def index
     @search = Quest.search(params[:q])
-    @quests = @search.result.paginate(per_page: 5, page: params[:page]).where(adventurer: nil).where.not(questgiver: current_user)
+    @quests = @search.result.paginate(per_page: 5, page: params[:page]).where(adventurer: nil, status: 0).where.not(questgiver: current_user)
 
     if params[:within].present? && (params[:within].to_i > 0)
       # Location
