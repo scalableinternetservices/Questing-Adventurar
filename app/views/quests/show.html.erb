@@ -57,7 +57,6 @@
   <strong>This quest is no longer open.</strong>
 </p>
 <% else %>
-  <!-- <strong><%= "Pending adventurers!" if @quest.pendings %></strong> -->
   <table class="table">
   <% if @quest.pendings.present? %>
     <thead>
@@ -75,9 +74,8 @@
           </tr>
         <% end %>
     </tbody>
+  </table>
   <% else %>
-      <strong> No pending adventurers! </strong>
+    <p> No pending adventurers! </p>
   <% end %>
-</table>
-</div>
 <% end %>

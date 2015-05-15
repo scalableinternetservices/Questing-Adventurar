@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150515022244) do
+ActiveRecord::Schema.define(version: 20150515045338) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -40,30 +40,13 @@ ActiveRecord::Schema.define(version: 20150515022244) do
 
   add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
 
-  create_table "average_caches", force: :cascade do |t|
-    t.integer  "rater_id",      limit: 4
-    t.integer  "rateable_id",   limit: 4
-    t.string   "rateable_type", limit: 255
-    t.float    "avg",           limit: 24,  null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "overall_averages", force: :cascade do |t|
-    t.integer  "rateable_id",   limit: 4
-    t.string   "rateable_type", limit: 255
-    t.float    "overall_avg",   limit: 24,  null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "pendings", force: :cascade do |t|
     t.integer "quest_id", limit: 4
     t.integer "user_id",  limit: 4
   end
 
-  add_index "pendings", ["quest_id"], name: "fk_rails_bf4f56646d", using: :btree
-  add_index "pendings", ["user_id"], name: "fk_rails_348b8ce411", using: :btree
+  add_index "pendings", ["quest_id"], name: "fk_rails_3296d82b85", using: :btree
+  add_index "pendings", ["user_id"], name: "fk_rails_f15b1b00fb", using: :btree
 
   create_table "phone_numbers", force: :cascade do |t|
     t.integer "user_id",      limit: 4
@@ -73,15 +56,16 @@ ActiveRecord::Schema.define(version: 20150515022244) do
   add_index "phone_numbers", ["user_id"], name: "index_phone_numbers_on_user_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
-    t.integer "user_id",           limit: 4
-    t.string  "first_name",        limit: 255
-    t.string  "last_name",         limit: 255
-    t.string  "gender",            limit: 255
-    t.decimal "questgiver_rating",             precision: 10
-    t.decimal "adventurer_rating",             precision: 10
-    t.string  "address",           limit: 255
-    t.float   "latitude",          limit: 24
-    t.float   "longitude",         limit: 24
+    t.integer "user_id",                limit: 4
+    t.string  "first_name",             limit: 255
+    t.string  "last_name",              limit: 255
+    t.string  "gender",                 limit: 255
+    t.decimal "questgiver_rating",                  precision: 10
+    t.decimal "adventurer_rating",                  precision: 10, scale: 2
+    t.integer "num_adventurer_ratings", limit: 4,                            default: 0
+    t.string  "address",                limit: 255
+    t.float   "latitude",               limit: 24
+    t.float   "longitude",              limit: 24
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -97,33 +81,8 @@ ActiveRecord::Schema.define(version: 20150515022244) do
     t.integer  "status",          limit: 4,                            default: 0
   end
 
-  add_index "quests", ["adventurer_id"], name: "fk_rails_ebc9300d3c", using: :btree
-  add_index "quests", ["questgiver_id"], name: "fk_rails_371c072cbc", using: :btree
-
-  create_table "rates", force: :cascade do |t|
-    t.integer  "rater_id",      limit: 4
-    t.integer  "rateable_id",   limit: 4
-    t.string   "rateable_type", limit: 255
-    t.float    "stars",         limit: 24,  null: false
-    t.string   "dimension",     limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type", using: :btree
-  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id", using: :btree
-
-  create_table "rating_caches", force: :cascade do |t|
-    t.integer  "cacheable_id",   limit: 4
-    t.string   "cacheable_type", limit: 255
-    t.float    "avg",            limit: 24,  null: false
-    t.integer  "qty",            limit: 4,   null: false
-    t.string   "dimension",      limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
+  add_index "quests", ["adventurer_id"], name: "fk_rails_6f9b60add0", using: :btree
+  add_index "quests", ["questgiver_id"], name: "fk_rails_8d95dd76a6", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "quest_id",      limit: 4
@@ -134,9 +93,9 @@ ActiveRecord::Schema.define(version: 20150515022244) do
     t.datetime "post_time"
   end
 
-  add_index "reviews", ["adventurer_id"], name: "fk_rails_a8f70b96e1", using: :btree
-  add_index "reviews", ["quest_id"], name: "fk_rails_d5cb7a2472", using: :btree
-  add_index "reviews", ["questgiver_id"], name: "fk_rails_128c278297", using: :btree
+  add_index "reviews", ["adventurer_id"], name: "fk_rails_e9a6a355bc", using: :btree
+  add_index "reviews", ["quest_id"], name: "fk_rails_fd1351f8ac", using: :btree
+  add_index "reviews", ["questgiver_id"], name: "fk_rails_080ccda267", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id",        limit: 4

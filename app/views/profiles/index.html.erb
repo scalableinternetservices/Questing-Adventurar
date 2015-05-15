@@ -12,6 +12,27 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="dashboard">
       <h1>Welcome back, <%= current_user.profile.first_name %>!</h1>
+      <p>You're currently adventuring through some number of quests.</p>
+      
+      <% if false %>
+        <p> Your current adventurer rating: <%= current_user.profile.adventurer_rating %> </p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Rating</th>
+              <th>Comments</th>
+            </tr>
+          </thead>
+          <tbody>
+           <% current_user.reviews.each do |review| %>
+            <tr>
+              <td> <%= review.rating %></td>
+              <td> <%= review.comment %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <% end %>
       <%= render_activities @activities %>
 <!--        <% current_user.reviews.each do |review| %>
       <tr>
@@ -45,8 +66,10 @@
               <td><%= link_to quest.questgiver.username, quest.questgiver.profile %>&nbsp;
                 <%= quest.questgiver.phone_numbers if quest.questgiver.phone_numbers.exists?%></td>
               <td class="text-right">
-                <%= link_to complete_quests_path(id: quest, s: true), method: :post, class: "btn btn-success" do %>
-                  <span class="glyphicon glyphicon-ok"></span>
+                <% if !quest.complete? %>
+                  <%= link_to complete_quests_path(id: quest, s: true), method: :post, class: "btn btn-success" do %>
+                    <span class="glyphicon glyphicon-ok"></span>
+                  <% end %>
                 <% end %>
                 <%= link_to complete_quests_path(id: quest, s: false), method: :post, class: "btn btn-danger" do %>
                   <span class="glyphicon glyphicon-remove"></span>
@@ -90,7 +113,7 @@
         </thead>
 
         <tbody>
-          <% current_user.quests_posted.each do |quest| %>
+          <% current_user.quests_posted.each  do |quest|%>
             <tr>
               <td><%= link_to quest.title, quest %></td>
               <td><%= quest.price %></td>
@@ -104,7 +127,7 @@
               <td><%= link_to quest.adventurer.username, quest.adventurer.profile if quest.adventurer %>&nbsp;
                 <%= quest.questgiver.phone_numbers if quest.questgiver.phone_numbers.exists?%></td>
               <td class="text-right">
-                <% if quest.status.eql? "complete" %>
+                <% if quest.complete? %>
                 <%= link_to new_review_path(param: {quest_id: quest.id, questgiver_id: quest.questgiver_id, adventurer_id: quest.adventurer_id}), class: "btn btn-info" do %>
                   <span class="glyphicon glyphicon-star"></span>
                 <% end %>
