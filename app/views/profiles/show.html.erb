@@ -28,5 +28,10 @@
   <%= @profile.adventurer_rating %>
 </p>
 
+<p>
+  <strong>Quests Completed:</strong>
+  <%= @profile.num_adventurer_ratings %>
+</p>
+
 <%= link_to 'Edit', edit_user_registration_path() %> |
 <%= link_to 'Back', profiles_path %>

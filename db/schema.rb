@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150510080932) do
+ActiveRecord::Schema.define(version: 20150514185457) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id",  limit: 4
@@ -39,12 +39,13 @@ ActiveRecord::Schema.define(version: 20150510080932) do
   add_index "phone_numbers", ["user_id"], name: "index_phone_numbers_on_user_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
-    t.integer "user_id",           limit: 4
-    t.string  "first_name",        limit: 255
-    t.string  "last_name",         limit: 255
-    t.string  "gender",            limit: 255
-    t.decimal "questgiver_rating",             precision: 10
-    t.decimal "adventurer_rating",             precision: 10
+    t.integer "user_id",                limit: 4
+    t.string  "first_name",             limit: 255
+    t.string  "last_name",              limit: 255
+    t.string  "gender",                 limit: 255
+    t.decimal "questgiver_rating",                  precision: 10
+    t.decimal "adventurer_rating",                  precision: 10, scale: 2
+    t.integer "num_adventurer_ratings", limit: 4,                            default: 0
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -72,9 +73,9 @@ ActiveRecord::Schema.define(version: 20150510080932) do
     t.datetime "post_time"
   end
 
-  add_index "reviews", ["adventurer_id"], name: "fk_rails_18f262acde", using: :btree
-  add_index "reviews", ["quest_id"], name: "fk_rails_b45ce002d9", using: :btree
-  add_index "reviews", ["questgiver_id"], name: "fk_rails_c4c3fb34ac", using: :btree
+  add_index "reviews", ["adventurer_id"], name: "fk_rails_e9a6a355bc", using: :btree
+  add_index "reviews", ["quest_id"], name: "fk_rails_fd1351f8ac", using: :btree
+  add_index "reviews", ["questgiver_id"], name: "fk_rails_080ccda267", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id",        limit: 4

@@ -52,4 +52,4 @@ quest4:
   description: Chicken is on sale!
   post_time: <%= 5.day.ago.to_s(:db) %>
   expiration_time: <%= 5.day.from_now.to_s(:db) %>
-  status: 2
+  status: 0

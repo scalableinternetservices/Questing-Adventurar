@@ -26,9 +26,33 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
 
+    #update adventurer rating
+    @adventurer_profile = Profile.find_by user_id: @review.adventurer_id
+    @adventurer_current_rating = @adventurer_profile.adventurer_rating
+    @adventurer_total_ratings = @adventurer_profile.num_adventurer_ratings
+
+    #take average of previous ratings with current rating
+    @adventurer_profile.adventurer_rating = (@adventurer_profile.adventurer_rating*@adventurer_profile.num_adventurer_ratings+@review.rating)/(@adventurer_profile.num_adventurer_ratings+1).to_f
+
+    @adventurer_profile.num_adventurer_ratings = @adventurer_profile.num_adventurer_ratings+1
+
+    #@adventurer_profile.adventurer_rating = (@adventurer_profile.adventurer_rating*@adventurer_profile.num_adventurer_ratings+5)/(@adventurer_profile.num_adventurer_ratings+1).to_f
+
+
+    @quest = Quest.find_by id: @review.quest_id
+    @quest.status = 3
+
+    # verify that review doesnt already exist
+    @duplicate_review = Review.find_by id: @review.quest_id
+
     respond_to do |format|
-      if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
+      if !@duplicate_review
+        format.html { redirect_to @quest, notice: 'You already submitted a review for this quest!' }
+        format.json { render json: @pending.errors, status: :unprocessable_entity }
+      elsif @review.save
+        @adventurer_profile.save!
+        @quest.save!;
+        format.html { redirect_to :back, notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }
