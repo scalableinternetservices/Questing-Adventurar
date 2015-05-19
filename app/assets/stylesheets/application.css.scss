@@ -1,9 +1,12 @@
 @import "bootstrap-sprockets";
+@import "bootswatch/yeti/variables";
 @import "bootstrap";
 
 body {
   padding-top: 70px;
 }
+
+@import "bootswatch/yeti/bootswatch";
 
 #tag_cloud {
   width: 400px;

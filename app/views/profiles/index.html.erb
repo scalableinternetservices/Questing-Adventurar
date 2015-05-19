@@ -34,12 +34,6 @@
         </table>
       <% end %>
       <%= render_activities @activities %>
-<!--        <% current_user.reviews.each do |review| %>
-      <tr>
-        <td> <%= review.rating %></td>
-        <td> <%= review.comment %></td>
-      </tr>
-      <% end %> -->
     </div>
 
 
@@ -128,9 +122,9 @@
                 <%= quest.questgiver.phone_numbers if quest.questgiver.phone_numbers.exists?%></td>
               <td class="text-right">
                 <% if quest.complete? %>
-                <%= link_to new_review_path(param: {quest_id: quest.id, questgiver_id: quest.questgiver_id, adventurer_id: quest.adventurer_id}), class: "btn btn-info" do %>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#new_review_modal" data-qid=<%= quest.id %>>
                   <span class="glyphicon glyphicon-star"></span>
-                <% end %>
+                </button>
                 <% end %>
                 <%= link_to quest_path(quest), class: "btn btn-default" do %>
                   <span class="glyphicon glyphicon-chevron-right"></span>
@@ -162,7 +156,15 @@
               <td><%= quest.price %></td>
               <td><%= quest.description %></td>
               <td><%= time_ago_in_words(quest.post_time) %></td>
-              <td><%= link_to quest.review.rating, quest.review if quest.review %></td>
+              <td>
+              <% if quest.review %>  
+                <span class="label label-default" rel="details" data-id=<%= quest.review.id %>>
+                  <% quest.review.rating.times do |i| %>
+                    <span class="glyphicon glyphicon-star"></span>
+                  <% end %>
+                </span>
+              <% end %>
+              </td>  
               <td><%= link_to quest.questgiver.username, quest.questgiver.profile %></td>
               <td class="text-right">
                 <% if quest.success? %>
@@ -179,6 +181,23 @@
           <% end %>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="new_review_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Write a review</h4>
+      </div>
+      <div class="modal-body">
+        <%= render 'reviews/form', modal: true %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>
