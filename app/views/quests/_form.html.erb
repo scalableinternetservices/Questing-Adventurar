@@ -28,9 +28,7 @@
     <%= f.text_area :tag_list, class: "form-control" %>
   </div>
 
-  <% if @quest.persisted? %>
-    <%= f.hidden_field :post_time, :value => Time.now %>
-  <% end %>
+  <%= f.hidden_field :post_time, :value => Time.now %>
 
   <div class="form-group">
     <%= f.label :expiration_time %><br>
