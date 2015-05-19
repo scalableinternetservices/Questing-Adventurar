@@ -34,12 +34,6 @@
         </table>
       <% end %>
       <%= render_activities @activities %>
-<!--        <% current_user.reviews.each do |review| %>
-      <tr>
-        <td> <%= review.rating %></td>
-        <td> <%= review.comment %></td>
-      </tr>
-      <% end %> -->
     </div>
 
 
@@ -162,7 +156,7 @@
               <td><%= quest.price %></td>
               <td><%= quest.description %></td>
               <td><%= time_ago_in_words(quest.post_time) %></td>
-              <td><%= link_to quest.review.rating, quest.review if quest.review %></td>
+              <td><%= link_to quest.review.rating, quest.review, {rel: "details", value: quest.review.id} if quest.review %></td>
               <td><%= link_to quest.questgiver.username, quest.questgiver.profile %></td>
               <td class="text-right">
                 <% if quest.success? %>
