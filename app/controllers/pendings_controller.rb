@@ -19,7 +19,8 @@ end
 # POST /pendings
 # POST /pendings.json
  def create
-    @pending = Pending.new(pending_params) 
+    @pending = Pending.new(pending_params)
+    @pending.user = current_user 
     @pending_validation = current_user.pendings # gets list of quests user currently has pending
 
     @pending_is_valid = true;

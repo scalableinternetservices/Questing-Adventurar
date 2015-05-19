@@ -41,7 +41,12 @@ class QuestsController < ApplicationController
   # POST /quests/accept
   def accept
     Pending.delete_all(quest_id: @quest.id)
-    @quest.adventurer = User.find(params[:adventurer])
+    if params[:adventurer]
+      @quest.adventurer = User.find(params[:adventurer])
+    else
+      @quest.adventurer = current_user # Tsung testing.
+    end
+
     @quest.create_activity :accept, owner: current_user, recipient: @quest.adventurer
     @quest.accepted!
     @quest.save!

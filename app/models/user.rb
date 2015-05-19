@@ -16,20 +16,20 @@ class User < ActiveRecord::Base
             }
 
   # Supplementary user information.
-  has_one  :profile
+  has_one  :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
 
-  has_many :addresses
-  has_many :phone_numbers
+  has_many :addresses, dependent: :destroy
+  has_many :phone_numbers, dependent: :destroy
 
   # Quest information.
-  has_many :quests_posted, class_name: 'Quest', foreign_key: :questgiver_id
-  has_many :quests_accepted, class_name: 'Quest', foreign_key: :adventurer_id
+  has_many :quests_posted, class_name: 'Quest', foreign_key: :questgiver_id, dependent: :destroy
+  has_many :quests_accepted, class_name: 'Quest', foreign_key: :adventurer_id, dependent: :destroy
 
   has_many :pendings
   has_many :pending_quests, through: :pendings, class_name: 'Quest', source: :quest, dependent: :destroy
 
-  has_many :reviews, class_name: 'Review', foreign_key: :adventurer_id
+  has_many :reviews, class_name: 'Review', foreign_key: :adventurer_id, dependent: :destroy
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
