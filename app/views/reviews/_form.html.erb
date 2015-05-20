@@ -10,10 +10,25 @@
       </ul>
     </div>
   <% end %>
+
   <div class="form-group">
     <%= f.label :rating %><br>
-    <%= f.number_field :rating, min: 1, max: 5, class:"form-control" %>
+    <div id="rating"></div1>
+
+      <script> 
+      var rating = 0
+      $('#rating').raty({
+              score : 3,
+              starOff : '<%= image_path('star-off.png') %>',
+              starOn : '<%= image_path('star-on.png') %>',
+              click : function(score, evt) { 
+                console.log("score: " + score);
+                $('#review_rating').val(score) }
+      }); 
+      </script>
+      <input id="review_rating" name="review[rating]" type="hidden"/>
   </div>
+  
 
   <input id="review_quest_id" name="review[quest_id]" type="hidden">
 
