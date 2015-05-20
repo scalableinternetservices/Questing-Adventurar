@@ -189,13 +189,13 @@
 
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- <request subst="true">
+      <request subst="true">
         <http
           url='/users'
           version='1.1'
           method='DELETE'>
         </http>
-      </request> -->
+      </request>
 
       <!-- Uncomment the following to debug print your dynamic variables  --> 
       <!--

@@ -8,10 +8,10 @@ class Quest < ActiveRecord::Base
   belongs_to :adventurer, class_name: 'User', foreign_key: 'adventurer_id'
   belongs_to :questgiver, class_name: 'User', foreign_key: 'questgiver_id'
 
-  has_many :pendings
+  has_many :pendings, dependent: :destroy
   has_many :pending_adventurers, through: :pendings, class_name: 'User',
-           source: :user, dependent: :destroy
-  has_one :review, class_name: 'Review', foreign_key: :quest_id
+           source: :user
+  has_one :review, class_name: 'Review', foreign_key: :quest_id, dependent: :destroy
 
   enum status: [:open, :accepted, :complete, :success, :failure]
 
