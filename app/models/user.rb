@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
   has_many :quests_posted, class_name: 'Quest', foreign_key: :questgiver_id, dependent: :destroy
   has_many :quests_accepted, class_name: 'Quest', foreign_key: :adventurer_id, dependent: :destroy
 
-  has_many :pendings
-  has_many :pending_quests, through: :pendings, class_name: 'Quest', source: :quest, dependent: :destroy # don't change
+  has_many :pendings, dependent: :destroy
+  has_many :pending_quests, through: :pendings, class_name: 'Quest', source: :quest
 
   has_many :reviews, class_name: 'Review', foreign_key: :adventurer_id, dependent: :destroy
 
