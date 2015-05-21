@@ -11,7 +11,7 @@ class Quest < ActiveRecord::Base
   has_many :pendings
   has_many :pending_adventurers, through: :pendings, class_name: 'User',
            source: :user, dependent: :destroy
-  has_one :review, class_name: 'Review', foreign_key: :quest_id
+  has_one :review, class_name: 'Review', foreign_key: :quest_id, dependent: :destroy
 
   enum status: [:open, :accepted, :complete, :success, :failure]
 

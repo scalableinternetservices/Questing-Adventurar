@@ -1,26 +1,26 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Rating:</strong>
-  <%= @review.rating %>
-</p>
-
-<p>
-  <strong>Quest:</strong>
-  <%= @review.quest.title %>
-</p>
-
-<p>
-  <strong>Questgiver:</strong>
-  <%= @review.questgiver.username %>
-</p>
-
-<p>
-  <strong>Adventurer:</strong>
-  <%= @review.adventurer.username %>
-</p>
-
-<p>
-  <strong>Comment:</strong>
-  <%= @review.comment %>
-</p>
+<div class="col-md-6">
+  <table class="table">
+    <thead>
+      <th><h1><%= @review.quest.title %></h1></th>
+      <th>&nbsp;</th>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Rating</th>
+        <td><%= @review.rating %></td>
+      </tr>
+      <tr>
+        <th scope="row">Questgiver</th>
+        <td><%= @review.quest.questgiver.username %></td>
+      </tr>
+      <tr>
+        <th scope="row">Adventurer</th>
+        <td><%= @review.quest.adventurer.username %></td>
+      </tr>
+      <tr>
+        <th scope="row">Comment</th>
+        <td><%= @review.comment %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

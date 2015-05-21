@@ -1,26 +1,26 @@
-<p>
-  <strong>First name:</strong>
-  <%= @profile.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @profile.last_name %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @profile.gender %>
-</p>
-
-<p>
-  <strong>Questgiver rating:</strong>
-  <%= @profile.questgiver_rating %>
-</p>
-
-<p>
-  <strong>Adventurer rating:</strong>
-  <%= @profile.adventurer_rating %>
-</p>
-
-<%= link_to "Back", :back %>
+<div class="col-md-6">
+  <table class="table">
+    <thead>
+      <th><h1><%= @profile.user.username %></h1></th>
+      <th>&nbsp;</th>
+    </thead>
+  <tbody>
+    <tr>
+      <th scope="row">First Name</th>
+      <td><%= @profile.first_name %></td>
+    </tr>
+    <tr>
+      <th scope="row">Last Name</th>
+      <td><%= @profile.last_name %></td>
+    </tr>
+    <tr>
+      <th scope="row">Gender</th>
+      <td><%= @profile.gender %></td>
+    </tr>
+    <tr>
+      <th scope="row">Rating</th>
+      <td><%= @profile.questgiver_rating %> (out of 5)</td>
+    </tr>
+  </tbody>
+  </table>
+</div>

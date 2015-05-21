@@ -47,8 +47,17 @@
       <th scope="row">Expiration time</th>
       <td><%= @quest.expiration_time %></td>
     </tr>
+    <% if @quest.review %>
+    <tr>
+      <th scope="row">Rating</th>
+      <td><%= link_to @quest.review.rating, @quest.review %></td>
+    </tr>
+    <% end %>
   </tbody>
   </table>
+  <p>
+  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=550x300&maptype=roadmap&zoom=13&markers=%7C#{@quest.questgiver.profile.latitude},#{@quest.questgiver.profile.longitude}" %>
+</p> 
 </div>
 
 <div class="col-md-6">
@@ -71,6 +80,7 @@
           </tr>
         <% end %>
     </tbody>
+    <% end %>
   </table>
   <% end %>
-<% end %>
+</div>

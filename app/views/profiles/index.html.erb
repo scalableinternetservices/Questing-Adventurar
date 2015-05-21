@@ -54,7 +54,7 @@
           <% current_user.quests_accepted.where("status <= ?", Quest.statuses[:complete]).each do |quest| %>
             <tr class="<%= quest.complete? ? "info" : "" %>">
               <td><%= link_to quest.title, quest %></td>
-              <td><%= quest.price %></td>
+              <td><%= number_to_currency quest.price %></td>
               <td><%= quest.description %></td>
               <td>in <%= time_ago_in_words(quest.expiration_time) %></td>
               <td><%= link_to quest.questgiver.username, quest.questgiver.profile %>&nbsp;
@@ -74,7 +74,7 @@
           <% current_user.pendings.each do |pq| %>
             <tr class="active">
               <td><%= link_to pq.quest.title, pq.quest %></td>
-              <td><%= pq.quest.price %></td>
+              <td><%= number_to_currency pq.quest.price %></td>
               <td><%= pq.quest.description %></td>
               <% if pq.quest.expiration_time < Time.now %>
               <td class="text-danger">expired <%= time_ago_in_words(pq.quest.expiration_time) %> ago!</font> </td>
@@ -110,7 +110,7 @@
           <% current_user.quests_posted.each  do |quest|%>
             <tr>
               <td><%= link_to quest.title, quest %></td>
-              <td><%= quest.price %></td>
+              <td><%= number_to_currency quest.price %></td>
               <td><%= quest.description %></td>
               <% if quest.expiration_time < Time.now %>
               <td class="text-danger">expired <%= time_ago_in_words(quest.expiration_time) %> ago!</font> </td>
@@ -153,7 +153,7 @@
           <% current_user.quests_accepted.where("status >= ?", Quest.statuses[:complete]).each do |quest| %>
             <tr>
               <td><%= quest.title %></td>
-              <td><%= quest.price %></td>
+              <td><%= number_to_currency quest.price %></td>
               <td><%= quest.description %></td>
               <td><%= time_ago_in_words(quest.post_time) %></td>
               <td>

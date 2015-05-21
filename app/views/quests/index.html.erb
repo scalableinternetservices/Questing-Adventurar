@@ -53,7 +53,7 @@
     <% @quests.each do |quest| %>
       <tr>
         <td><%= link_to quest.title, quest %></td>
-        <td><%= quest.price %></td>
+        <td><%= number_to_currency quest.price %></td>
         <td><%= quest.description %></td>
         <td><%= time_ago_in_words(quest.post_time) %> ago</td>
               <% if quest.expiration_time < Time.now %>
