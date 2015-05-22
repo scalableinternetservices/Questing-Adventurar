@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<!DOCTYPE tsung SYSTEM "/home/ec2-user/opt/tsung-1.5.0/share/tsung/tsung-1.0.dtd">
+<tsung loglevel="info" version="1.0">
+
+  <!-- Client side setup -->
+  <clients>
+    <client host="localhost" use_controller_vm="true" maxusers='15000'/>
+  </clients>
+
+  <!-- Server side setup -->
+  <servers>
+    <server host="ec2-52-10-92-118.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+  </servers>
+
+
+  <load>
+    <arrivalphase phase="1" duration="30" unit="second">
+      <users arrivalrate="1" unit="second"></users>
+    </arrivalphase>
+    <arrivalphase phase="2" duration="30" unit="second">
+      <users arrivalrate="2" unit="second"></users>
+    </arrivalphase>
+    <arrivalphase phase="3" duration="30" unit="second">
+      <users arrivalrate="4" unit="second"></users>
+    </arrivalphase>
+   <!-- <arrivalphase phase="4" duration="30" unit="second">
+     <users arrivalrate="8" unit="second"></users>
+   </arrivalphase>
+   <arrivalphase phase="5" duration="30" unit="second">
+     <users arrivalrate="16" unit="second"></users>
+   </arrivalphase>
+   <arrivalphase phase="6" duration="30" unit="second">
+     <users arrivalrate="32" unit="second"></users>
+   </arrivalphase> -->
+<!--
+   <arrivalphase phase="7" duration="30" unit="second">
+     <users arrivalrate="64" unit="second"></users>
+   </arrivalphase>
+   <arrivalphase phase="8" duration="30" unit="second">
+     <users arrivalrate="128" unit="second"></users>
+   </arrivalphase>
+   <arrivalphase phase="9" duration="30" unit="second">
+     <users arrivalrate="256" unit="second"></users>
+   </arrivalphase>
+   <arrivalphase phase="10" duration="30" unit="second">
+     <users arrivalrate="512" unit="second"></users>
+   </arrivalphase>
+-->
+  </load>
+
+  <options>
+    <!-- Set connection timeout to 2 seconds -->
+    <option name="glocal_ack_timeout" value="2000"></option>
+
+    <option type="ts_http" name="user_agent">
+      <user_agent probability="100">Mozilla/5.0 (Windows; U; Windows NT 5.2; fr-FR; rv:1.7.8) Gecko/20050511 Firefox/1.0.4</user_agent>
+    </option>
+  </options>
+
+  <sessions>
+    <session name="quest-critical-path" probability="100" type="ts_http">
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request>
+        <http url='/users/sign_up' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <setdynvars sourcetype="random_number" start="1000" end="9999999">
+        <var name="random_username" />
+      </setdynvars>
+
+      <request subst="true">
+        <http
+          url='/users'
+          version='1.1'
+          method='POST'
+          content_type='application/x-www-form-urlencoded'
+          contents='user%5Busername%5D=%%_random_username%%&amp;user%5Bemail%5D=%%_random_username%%%40questingadventurer.com&amp;user%5Bpassword%5D=adventurer&amp;user%5Bpassword_confirmation%5D=adventurer&amp;user%5Bprofile_attributes%5D%5Bfirst_name%5D=Questing&amp;user%5Bprofile_attributes%5D%5Blast_name%5D=Adventurer&amp;user%5Bprofile_attributes%5D%5Bgender%5D=Male&amp;user%5Bprofile_attributes%5D%5Baddress%5D=400+Gayley+Avenue%2C+Los+Angeles%2C+CA+90024&amp;commit=Sign+up'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http
+          url='/quests/new'
+          version='1.1'
+          method='GET'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <dyn_variable name="created_quest_url" re="[Ll]ocation: (http://.*)\r"/>
+        <dyn_variable name="created_quest_id" re="[Ll]ocation: http://.*/quests/(.*)\r"/>
+        <http
+          url='/quests'
+          version='1.1'
+          method='POST'
+          content_type='application/x-www-form-urlencoded'
+          contents='quest%5Btitle%5D=Testing&amp;quest%5Bprice%5D=5.00&amp;quest%5Bdescription%5D=Test+description.&amp;quest%5Btag_list%5D=yum&amp;quest%5Bpost_time%5D=2015-05-19+14%3A41%3A37+-0700&amp;quest%5Bexpiration_time%281i%29%5D=2016&amp;quest%5Bexpiration_time%282i%29%5D=6&amp;quest%5Bexpiration_time%283i%29%5D=1&amp;quest%5Bexpiration_time%284i%29%5D=21&amp;quest%5Bexpiration_time%285i%29%5D=40&amp;commit=Submit'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http
+          url='/quests?utf8=&#10003;&amp;q%5Btitle_or_description_cont_any%5D=&amp;q%5Bprice_gteq%5D=0&amp;q%5Bprice_lteq%5D=100&amp;within=10&amp;commit=Search'
+          version='1.1'
+          method='GET'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http
+          url='/quests/%%_created_quest_id%%'
+          version='1.1'
+          method='GET'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http
+          url='/pendings'
+          version='1.1'
+          method='POST'
+          content_type='application/x-www-form-urlencoded'
+          contents='pending%5Bquest_id%5D=%%_created_quest_id%%'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http
+          url='/quests/accept'
+          version='1.1'
+          method='POST'
+          content_type='application/x-www-form-urlencoded'
+          contents='id=%%_created_quest_id%%'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http
+          url='/quests'
+          version='1.1'
+          method='GET'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http
+          url='/quests/complete'
+          version='1.1'
+          method='POST'
+          content_type='application/x-www-form-urlencoded'
+          contents='id=%%_created_quest_id%%&amp;s=true'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http
+          url='/reviews'
+          version='1.1'
+          method='POST'
+          content_type='application/x-www-form-urlencoded'
+          contents='review%5Brating%5D=5&amp;review%5Bquest_id%5D=%%_created_quest_id%%&amp;review%5Bcomment%5D=Sample+review&amp;review%5Bpost_time%5D=2015-05-19+15%3A34%3A10+-0700&amp;commit=Submit'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http
+          url='/users'
+          version='1.1'
+          method='DELETE'>
+        </http>
+      </request>
+
+      <!-- Uncomment the following to debug print your dynamic variables  --> 
+      <!--
+      <setdynvars sourcetype="eval" code="fun( {Pid, DynVars} ) ->
+        io:format([126, $p, 126, $n, 126, $n], [DynVars]),
+        ok end.">
+        <var name="dump" />
+      </setdynvars>
+      -->
+
+    </session>
+  </sessions>
+</tsung>

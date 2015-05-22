@@ -19,7 +19,8 @@ end
 # POST /pendings
 # POST /pendings.json
  def create
-    @pending = Pending.new(pending_params) 
+    @pending = Pending.new(pending_params)
+    @pending.user = current_user 
     @pending_validation = current_user.pendings # gets list of quests user currently has pending
 
     @pending_is_valid = true;
@@ -63,7 +64,7 @@ end
 def destroy
 @pending.destroy
 respond_to do |format|
-format.html { redirect_to :back, notice: 'Pending was successfully destroyed.' }
+format.html { redirect_to root_path, notice: 'Pending was successfully destroyed.' }
 format.json { head :no_content }
 end
 end

@@ -41,12 +41,17 @@ class QuestsController < ApplicationController
   # POST /quests/accept
   def accept
     Pending.delete_all(quest_id: @quest.id)
-    @quest.adventurer = User.find(params[:adventurer])
+    if params[:adventurer]
+      @quest.adventurer = User.find(params[:adventurer])
+    else
+      @quest.adventurer = current_user # Tsung testing.
+    end
+
     @quest.create_activity :accept, owner: current_user, recipient: @quest.adventurer
     @quest.accepted!
     @quest.save!
 
-    redirect_to :back, notice: 'Pending adventurer accepted!'
+    redirect_to root_path, notice: 'Pending adventurer accepted!'
   end
 
   # POST /quests/complete
@@ -60,7 +65,7 @@ class QuestsController < ApplicationController
     end
 
     @quest.save!
-    redirect_to :back, notice: 'Quest completed!'
+    redirect_to root_path, notice: 'Quest completed!'
   end
 
   # POST /quests
