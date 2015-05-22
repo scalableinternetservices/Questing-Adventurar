@@ -25,13 +25,12 @@ class ReviewsController < ApplicationController
   # POST /reviews.json
   def create
     @review = Review.new(review_params)
-    @quest = Quest.find_by id: @review.quest_id
 
-    @review.questgiver = @quest.questgiver
-    @review.adventurer = @quest.adventurer
+    @review.questgiver = @review.quest.questgiver
+    @review.adventurer = @quest.quest.adventurer
 
     #update adventurer rating
-    @adventurer_profile = Profile.find_by user_id: @review.adventurer_id
+    @adventurer_profile = @review.adventurer.profile
     @adventurer_current_rating = @adventurer_profile.adventurer_rating
     @adventurer_total_ratings = @adventurer_profile.num_adventurer_ratings
 
@@ -47,13 +46,17 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @duplicate_review != nil
-        format.html { redirect_to :back, notice: 'You already submitted a review for this quest!' }
+        format.html {
+          redirect_to root_path, notice: 'You already submitted a review for this quest!'
+        }
         format.json { render json: @pending.errors, status: :unprocessable_entity }
       elsif @review.save
         @adventurer_profile.save!
         @quest.save!;
         @review.create_activity :create, owner: current_user, recipient: @review.adventurer
-        format.html { redirect_to :back, notice: 'Review was successfully created.' }
+        format.html {
+          redirect_to root_path, notice: 'Review was successfully created.'
+        }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }

@@ -51,9 +51,7 @@ class QuestsController < ApplicationController
     @quest.accepted!
     @quest.save!
 
-    redirect_to :back, notice: 'Pending adventurer accepted!'
-  rescue ActionController::RedirectBackError
-    redirect_to root_path
+    redirect_to root_path, notice: 'Pending adventurer accepted!'
   end
 
   # POST /quests/complete
@@ -67,9 +65,7 @@ class QuestsController < ApplicationController
     end
 
     @quest.save!
-    redirect_to :back, notice: 'Quest completed!'
-  rescue ActionController::RedirectBackError
-    redirect_to root_path
+    redirect_to root_path, notice: 'Quest completed!'
   end
 
   # POST /quests
