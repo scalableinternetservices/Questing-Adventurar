@@ -33,6 +33,7 @@ gem 'will_paginate-bootstrap'
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'ransack', '~> 1.6.6'
 gem 'geocoder'
+gem 'gmaps4rails'
 gem 'public_activity'
 gem 'bootswatch-rails'
 

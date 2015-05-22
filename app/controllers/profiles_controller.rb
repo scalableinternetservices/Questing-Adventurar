@@ -7,6 +7,12 @@ class ProfilesController < ApplicationController
   def index
     @review = Review.new
     @activities = PublicActivity::Activity.order("created_at desc").where(recipient_id: current_user)
+    @profiles = Profile.all
+    @hash = Gmaps4rails.build_markers(@profiles) do |profile, marker|
+      marker.lat profile.latitude
+      marker.lng profile.longitude
+      marker.infowindow profile.user.username
+    end
   end
 
   # GET /profiles/1

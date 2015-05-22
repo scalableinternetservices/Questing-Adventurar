@@ -16,6 +16,18 @@ class QuestsController < ApplicationController
       # Location
       @nearby_users = current_user.profile.nearbys(params[:within]).select(:user_id).map(&:user_id)
       @quests = @quests.where(questgiver: @nearby_users)
+
+      @hash = Gmaps4rails.build_markers(@quests) do |quest, marker|
+        marker.lat quest.questgiver.profile.latitude
+        marker.lng quest.questgiver.profile.longitude
+        marker.infowindow quest.title
+      end
+
+      @my_marker = Gmaps4rails.build_markers(current_user.profile) do |profile, marker|
+        marker.lat profile.latitude
+        marker.lng profile.longitude
+        marker.infowindow "you are here!"
+      end 
     end
     
     if params[:tag]
