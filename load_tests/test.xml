@@ -23,13 +23,13 @@
     <arrivalphase phase="3" duration="30" unit="second">
       <users arrivalrate="4" unit="second"></users>
     </arrivalphase>
-   <!-- <arrivalphase phase="4" duration="30" unit="second">
+   <arrivalphase phase="4" duration="30" unit="second">
      <users arrivalrate="8" unit="second"></users>
    </arrivalphase>
    <arrivalphase phase="5" duration="30" unit="second">
      <users arrivalrate="16" unit="second"></users>
    </arrivalphase>
-   <arrivalphase phase="6" duration="30" unit="second">
+<!--    <arrivalphase phase="6" duration="30" unit="second">
      <users arrivalrate="32" unit="second"></users>
    </arrivalphase> -->
 <!--
@@ -82,6 +82,16 @@
           method='POST'
           content_type='application/x-www-form-urlencoded'
           contents='user%5Busername%5D=%%_random_username%%&amp;user%5Bemail%5D=%%_random_username%%%40questingadventurer.com&amp;user%5Bpassword%5D=adventurer&amp;user%5Bpassword_confirmation%5D=adventurer&amp;user%5Bprofile_attributes%5D%5Bfirst_name%5D=Questing&amp;user%5Bprofile_attributes%5D%5Blast_name%5D=Adventurer&amp;user%5Bprofile_attributes%5D%5Bgender%5D=Male&amp;user%5Bprofile_attributes%5D%5Baddress%5D=400+Gayley+Avenue%2C+Los+Angeles%2C+CA+90024&amp;commit=Sign+up'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http
+          url='/quests?utf8=&#10003;&amp;q%5Btitle_or_description_cont_any%5D=&amp;q%5Bprice_gteq%5D=0&amp;q%5Bprice_lteq%5D=100&amp;within=10&amp;commit=Search'
+          version='1.1'
+          method='GET'>
         </http>
       </request>
 
@@ -184,6 +194,16 @@
           method='POST'
           content_type='application/x-www-form-urlencoded'
           contents='review%5Brating%5D=5&amp;review%5Bquest_id%5D=%%_created_quest_id%%&amp;review%5Bcomment%5D=Sample+review&amp;review%5Bpost_time%5D=2015-05-19+15%3A34%3A10+-0700&amp;commit=Submit'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http
+          url='/quests'
+          version='1.1'
+          method='GET'>
         </http>
       </request>
 
