@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="ec2-52-25-85-241.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-24-168-221.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -95,7 +95,7 @@
         </http>
       </request>
 
-<!--       <thinktime value="2" random="true"></thinktime>
+      <thinktime value="2" random="true"></thinktime>
 
       <request subst="true">
         <dyn_variable name="created_quest_url" re="[Ll]ocation: (http://.*)\r"/>
@@ -107,9 +107,9 @@
           content_type='application/x-www-form-urlencoded'
           contents='quest%5Btitle%5D=Testing&amp;quest%5Bprice%5D=5.00&amp;quest%5Bdescription%5D=Test+description.&amp;quest%5Btag_list%5D=yum&amp;quest%5Bpost_time%5D=2015-05-19+14%3A41%3A37+-0700&amp;quest%5Bexpiration_time%281i%29%5D=2016&amp;quest%5Bexpiration_time%282i%29%5D=6&amp;quest%5Bexpiration_time%283i%29%5D=1&amp;quest%5Bexpiration_time%284i%29%5D=21&amp;quest%5Bexpiration_time%285i%29%5D=40&amp;commit=Submit'>
         </http>
-      </request> -->
+      </request>
 
-<!--       <thinktime value="2" random="true"></thinktime>
+      <thinktime value="2" random="true"></thinktime>
 
       <request subst="true">
         <http
@@ -185,9 +185,9 @@
           content_type='application/x-www-form-urlencoded'
           contents='review%5Brating%5D=5&amp;review%5Bquest_id%5D=%%_created_quest_id%%&amp;review%5Bcomment%5D=Sample+review&amp;review%5Bpost_time%5D=2015-05-19+15%3A34%3A10+-0700&amp;commit=Submit'>
         </http>
-      </request> -->
+      </request>
 
-<!--       <thinktime value="2" random="true"></thinktime>
+      <thinktime value="2" random="true"></thinktime>
 
       <request subst="true">
         <http
@@ -195,7 +195,7 @@
           version='1.1'
           method='DELETE'>
         </http>
-      </request> -->
+      </request>
 
       <!-- Uncomment the following to debug print your dynamic variables  --> 
       <!--
