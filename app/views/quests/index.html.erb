@@ -28,6 +28,7 @@
 </div>
 
 <br />
+<% cache(cache_key_for_quest_table) do %>
 <table class="table table-striped">
   <colgroup>
     <col class="col-md-2">
@@ -51,6 +52,7 @@
   </thead>
   <tbody>
     <% @quests.each do |quest| %>
+    <% cache(cache_key_for_quest_row(quest)) do %>
       <tr>
         <td><%= link_to quest.title, quest %></td>
         <td><%= number_to_currency quest.price %></td>
@@ -69,9 +71,13 @@
           <% end %>
         </td>
       </tr>
+    <% end %> 
+    <!-- row cache end -->
     <% end %>
   </tbody>
 </table>
+<% end %> 
+<!-- table cache end -->
 
 <br />
 <%= will_paginate @collection, renderer: BootstrapPagination::Rails %>

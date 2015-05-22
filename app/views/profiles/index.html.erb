@@ -16,6 +16,7 @@
 
       <% if false %>
         <p> Your current adventurer rating: <%= current_user.profile.adventurer_rating %> </p>
+
         <table class="table">
           <thead>
             <tr>
@@ -25,13 +26,17 @@
           </thead>
           <tbody>
            <% current_user.reviews.each do |review| %>
+           <% cache(cache_key_for_review_row(review)) do %>
             <tr>
               <td> <%= review.rating %></td>
               <td> <%= review.comment %></td>
             </tr>
+            <% end %> 
+            <!-- row cache end -->
           <% end %>
           </tbody>
         </table>
+
       <% end %>
       <%= render_activities @activities %>
     </div>
@@ -52,6 +57,7 @@
 
         <tbody>
           <% current_user.quests_accepted.where("status <= ?", Quest.statuses[:complete]).each do |quest| %>
+          <% cache(cache_key_for_accepted_quest_row(quest)) do %>
             <tr class="<%= quest.complete? ? "info" : "" %>">
               <td><%= link_to quest.title, quest %></td>
               <td><%= number_to_currency quest.price %></td>
@@ -70,8 +76,11 @@
                 <% end %>
               </td>
             </tr>
+            <% end %> 
+          <!-- row cache end -->
           <% end %>
           <% current_user.pendings.each do |pq| %>
+          <% cache(cache_key_for_pending_quest_row(pq)) do %>
             <tr class="active">
               <td><%= link_to pq.quest.title, pq.quest %></td>
               <td><%= number_to_currency pq.quest.price %></td>
@@ -89,9 +98,13 @@
                 <% end %>
               </td>
             </tr>
+            <% end %> 
+            <!-- row cache end -->
           <% end %>
         </tbody>
       </table>
+
+
     </div>
     <div role="tabpanel" class="tab-pane" id="posted">
       <table class="table table-striped">
