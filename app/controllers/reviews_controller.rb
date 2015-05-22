@@ -25,9 +25,8 @@ class ReviewsController < ApplicationController
   # POST /reviews.json
   def create
     @review = Review.new(review_params)
-
     @review.questgiver = @review.quest.questgiver
-    @review.adventurer = @quest.quest.adventurer
+    @review.adventurer = @review.quest.adventurer
 
     #update adventurer rating
     @adventurer_profile = @review.adventurer.profile
