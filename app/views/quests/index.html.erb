@@ -54,14 +54,14 @@
     <% @quests.each do |quest| %>
     <% cache(cache_key_for_quest_row(quest)) do %>
       <tr>
-        <td><%= link_to quest.title, quest %></td>
+        <td><%= link_to quest.title, quest %></td> <!-- rails route -->
         <td><%= number_to_currency quest.price %></td>
         <td><%= quest.description %></td>
-        <td><%= time_ago_in_words(quest.post_time) %> ago</td>
+        <td><%= quest.post_time %></td>
               <% if quest.expiration_time < Time.now %>
-              <td class="text-danger">expired <%= time_ago_in_words(quest.expiration_time) %> ago!</font> </td>
+              <td class="text-danger"><%= quest.expiration_time %></td>
               <% else %>
-              <td>in <%= time_ago_in_words(quest.expiration_time) %>
+              <td>in <%= quest.expiration_time %>
               <% end %>
               </td>
         <td><%= link_to quest.questgiver.username, quest.questgiver.profile %></td>

@@ -62,7 +62,7 @@
               <td><%= link_to quest.title, quest %></td>
               <td><%= number_to_currency quest.price %></td>
               <td><%= quest.description %></td>
-              <td>in <%= time_ago_in_words(quest.expiration_time) %></td>
+              <td><%= quest.expiration_time %></td>
               <td><%= link_to quest.questgiver.username, quest.questgiver.profile %>&nbsp;
                 <%= quest.questgiver.phone_numbers if quest.questgiver.phone_numbers.exists?%></td>
               <td class="text-right">
@@ -85,11 +85,7 @@
               <td><%= link_to pq.quest.title, pq.quest %></td>
               <td><%= number_to_currency pq.quest.price %></td>
               <td><%= pq.quest.description %></td>
-              <% if pq.quest.expiration_time < Time.now %>
-              <td class="text-danger">expired <%= time_ago_in_words(pq.quest.expiration_time) %> ago!</font> </td>
-              <% else %>
-              <td>in <%= time_ago_in_words(pq.quest.expiration_time) %>
-              <% end %>
+              <td><%= pq.quest.expiration_time %></font> </td>
               </td>
               <td><%= link_to pq.quest.questgiver.username, pq.quest.questgiver.profile %></td>
               <td class="text-right">
@@ -198,22 +194,24 @@
   </div>
 </div>
 
-<div class="modal" id="new_review_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Write a review</h4>
-      </div>
-      <div class="modal-body">
-        <%= render 'reviews/form', modal: true %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<% cache("review_modal_cache") do %>
+  <div class="modal" id="new_review_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Write a review</h4>
+        </div>
+        <div class="modal-body">
+          <%= render 'reviews/form', modal: true %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
 
 <% content_for :javascript do %>
   <%= javascript_include_tag 'profile' %>
