@@ -9,25 +9,33 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="ec2-52-10-92-118.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-25-233-43.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
   <load>
     <arrivalphase phase="1" duration="30" unit="second">
-      <users arrivalrate="1" unit="second"></users>
+      <users arrivalrate="1" unit="second"/>
+    </arrivalphase>
+    <arrivalphase phase="1.5" duration="30" unit="second">
     </arrivalphase>
     <arrivalphase phase="2" duration="30" unit="second">
-      <users arrivalrate="2" unit="second"></users>
+      <users arrivalrate="2" unit="second"/>
+    </arrivalphase>
+    <arrivalphase phase="2.5" duration="30" unit="second">
     </arrivalphase>
     <arrivalphase phase="3" duration="30" unit="second">
-      <users arrivalrate="4" unit="second"></users>
+      <users arrivalrate="4" unit="second"/>
+    </arrivalphase>
+    <arrivalphase phase="3.5" duration="30" unit="second">
     </arrivalphase>
    <arrivalphase phase="4" duration="30" unit="second">
-     <users arrivalrate="8" unit="second"></users>
+     <users arrivalrate="8" unit="second"/>
    </arrivalphase>
+   <arrivalphase phase="4.5" duration="30" unit="second">
+    </arrivalphase>
    <arrivalphase phase="5" duration="30" unit="second">
-     <users arrivalrate="16" unit="second"></users>
+     <users arrivalrate="16" unit="second"/>
    </arrivalphase>
 <!--    <arrivalphase phase="6" duration="30" unit="second">
      <users arrivalrate="32" unit="second"></users>
