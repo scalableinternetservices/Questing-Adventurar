@@ -14,10 +14,9 @@ class QuestsController < ApplicationController
 
     if params[:within].present? && (params[:within].to_i > 0)
       # Location
-      @nearby_users = current_user.profile.nearbys(params[:within]).select(:user_id).map(&:user_id)
-      @quests = @quests.where(questgiver: @nearby_users)
+      @quests = @quests.near([current_user.profile.latitude, current_user.profile.longitude], params[:within])
     end
-    
+
     if params[:tag]
       # Tag
       @quests = @quests.tagged_with(params[:tag]).where(adventurer: nil)
@@ -37,7 +36,7 @@ class QuestsController < ApplicationController
   # GET /quests/1/edit
   def edit
   end
-  
+
   # POST /quests/accept
   def accept
     Pending.delete_all(quest_id: @quest.id)
@@ -73,6 +72,8 @@ class QuestsController < ApplicationController
   def create
     @quest = Quest.new(quest_params)
     @quest.questgiver = current_user
+    @quest.latitude = @quest.questgiver.profile.latitude
+    @quest.longitude = @quest.questgiver.profile.longitude
     respond_to do |format|
       if @quest.save
         # @quest.create_activity :create, owner: current_user, recipient: @quest.questgiver

@@ -6,6 +6,7 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @review = Review.new
+    @accepted_quests = current_user.quests_accepted
     @activities = PublicActivity::Activity.order("created_at desc").where(recipient_id: current_user)
   end
 

@@ -2,9 +2,10 @@ class Quest < ActiveRecord::Base
   validates :title, :price, :description,
             :post_time, :expiration_time, presence: true
   validates :price, numericality: {greater_than_or_equal_to: 0.01}
+  geocoded_by :not_an_address
 
   include PublicActivity::Common
-  
+
   belongs_to :adventurer, class_name: 'User', foreign_key: 'adventurer_id'
   belongs_to :questgiver, class_name: 'User', foreign_key: 'questgiver_id'
 

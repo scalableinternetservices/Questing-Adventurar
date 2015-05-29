@@ -34,12 +34,15 @@
     <arrivalphase phase="7" duration="60" unit="second">
       <users maxnumber="240" arrivalrate="8" unit="second"/>
     </arrivalphase>
-    <!-- <arrivalphase phase="14" duration="1" unit="minute">
-      <users arrivalrate="1" unit="minute"/>
+    <arrivalphase phase="8" duration="60" unit="second">
+      <users maxnumber="480" arrivalrate="16" unit="second"/>
     </arrivalphase>
-    <arrivalphase phase="15" duration="30" unit="second">
-      <users arrivalrate="8" unit="second"/>
-    </arrivalphase> -->
+    <arrivalphase phase="9" duration="60" unit="second">
+      <users maxnumber="960" arrivalrate="32" unit="second"/>
+    </arrivalphase>
+    <arrivalphase phase="10" duration="60" unit="second">
+      <users maxnumber="1920" arrivalrate="64" unit="second"/>
+    </arrivalphase>
   </load>
 
   <options>

@@ -51,7 +51,7 @@
         </thead>
 
         <tbody>
-          <% current_user.quests_accepted.where("status <= ?", Quest.statuses[:complete]).each do |quest| %>
+          <% @accepted_quests.where("status <= ?", Quest.statuses[:complete]).each do |quest| %>
             <tr class="<%= quest.complete? ? "info" : "" %>">
               <td><%= link_to quest.title, quest %></td>
               <td><%= number_to_currency quest.price %></td>
@@ -146,25 +146,25 @@
             <th>Review</th>
             <th>Questgiver</th>
             <th>&nbsp;</th>
-          </tr> 
+          </tr>
         </thead>
 
         <tbody>
-          <% current_user.quests_accepted.where("status >= ?", Quest.statuses[:complete]).each do |quest| %>
+          <% @accepted_quests.where("status >= ?", Quest.statuses[:complete]).each do |quest| %>
             <tr>
               <td><%= quest.title %></td>
               <td><%= number_to_currency quest.price %></td>
               <td><%= quest.description %></td>
               <td><%= time_ago_in_words(quest.post_time) %></td>
               <td>
-              <% if quest.review %>  
+              <% if quest.review %>
                 <span class="label label-default" rel="details" data-id=<%= quest.review.id %>>
                   <% quest.review.rating.times do |i| %>
                     <span class="glyphicon glyphicon-star"></span>
                   <% end %>
                 </span>
               <% end %>
-              </td>  
+              </td>
               <td><%= link_to quest.questgiver.username, quest.questgiver.profile %></td>
               <td class="text-right">
                 <% if quest.success? %>
@@ -205,4 +205,3 @@
 <% content_for :javascript do %>
   <%= javascript_include_tag 'profile' %>
 <% end %>
-
