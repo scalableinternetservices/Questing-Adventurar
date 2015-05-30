@@ -10,7 +10,7 @@ class Profile < ActiveRecord::Base
     if (self.address_changed?)
         if !(self.latitude_changed?)
             self.errors.add(:address, "is not valid")
-            return false
+            return true
         end
     end
     return true
