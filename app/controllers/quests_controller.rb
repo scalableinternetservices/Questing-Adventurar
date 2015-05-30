@@ -17,10 +17,10 @@ class QuestsController < ApplicationController
       @quests = @quests.near([current_user.profile.latitude, current_user.profile.longitude], params[:within])
     end
 
-    if params[:tag]
-      # Tag
-      @quests = @quests.tagged_with(params[:tag]).where(adventurer: nil)
-    end
+    # if params[:tag]
+    #   # Tag
+    #   @quests = @quests.tagged_with(params[:tag]).where(adventurer: nil)
+    # end
   end
 
   # GET /quests/1

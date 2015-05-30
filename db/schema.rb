@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20150529232249) do
     t.integer "user_id",  limit: 4
   end
 
-  add_index "pendings", ["quest_id"], name: "fk_rails_843e03d30f", using: :btree
-  add_index "pendings", ["user_id"], name: "fk_rails_313ee836a7", using: :btree
+  add_index "pendings", ["quest_id"], name: "fk_rails_59f6781497", using: :btree
+  add_index "pendings", ["user_id"], name: "fk_rails_abfe29d9ee", using: :btree
 
   create_table "phone_numbers", force: :cascade do |t|
     t.integer "user_id",      limit: 4
@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(version: 20150529232249) do
     t.float    "longitude",       limit: 24
   end
 
-  add_index "quests", ["adventurer_id"], name: "fk_rails_41093ccd1c", using: :btree
-  add_index "quests", ["questgiver_id"], name: "fk_rails_9c5a503fdb", using: :btree
+  add_index "quests", ["adventurer_id"], name: "fk_rails_bb2aee84d1", using: :btree
+  add_index "quests", ["questgiver_id"], name: "fk_rails_df24ddd150", using: :btree
   add_index "quests", ["status"], name: "index_quests_on_status", using: :btree
 
   create_table "reviews", force: :cascade do |t|
@@ -96,9 +96,9 @@ ActiveRecord::Schema.define(version: 20150529232249) do
     t.datetime "post_time"
   end
 
-  add_index "reviews", ["adventurer_id"], name: "fk_rails_958f7e2061", using: :btree
-  add_index "reviews", ["quest_id"], name: "fk_rails_c27cc9c564", using: :btree
-  add_index "reviews", ["questgiver_id"], name: "fk_rails_fccf5ded29", using: :btree
+  add_index "reviews", ["adventurer_id"], name: "fk_rails_41f9581d5f", using: :btree
+  add_index "reviews", ["quest_id"], name: "fk_rails_96b43ffbf9", using: :btree
+  add_index "reviews", ["questgiver_id"], name: "fk_rails_036d47d6d2", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id",        limit: 4
