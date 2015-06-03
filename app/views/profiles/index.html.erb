@@ -80,7 +80,7 @@
           <!-- row cache end -->
           <% end %>
           <% current_user.pendings.each do |pq| %>
-          <% cache(cache_key_for_pending_quest_row(pq)) do %>
+
             <tr class="active">
               <td><%= link_to pq.quest.title, pq.quest %></td>
               <td><%= number_to_currency pq.quest.price %></td>
@@ -94,7 +94,7 @@
                 <% end %>
               </td>
             </tr>
-            <% end %> 
+
             <!-- row cache end -->
           <% end %>
         </tbody>

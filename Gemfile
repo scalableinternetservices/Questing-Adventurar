@@ -35,6 +35,7 @@ gem 'ransack', '~> 1.6.6'
 gem 'geocoder'
 gem 'public_activity'
 gem 'bootswatch-rails'
+gem 'dalli'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
