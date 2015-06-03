@@ -10,14 +10,14 @@ class QuestsController < ApplicationController
     end
 
     @search = Quest.search(params[:q])
-    @quests = @search.result.paginate(per_page: 5, page: params[:page]).where(adventurer: nil, status: 0).where.not(questgiver: current_user)
+    @quests = @search.result.paginate(per_page: 512, page: params[:page]).where(adventurer: nil, status: 0).where.not(questgiver: current_user)
 
     if params[:within].present? && (params[:within].to_i > 0)
       # Location
       @nearby_users = current_user.profile.nearbys(params[:within]).select(:user_id).map(&:user_id)
       @quests = @quests.where(questgiver: @nearby_users)
     end
-    
+
     if params[:tag]
       # Tag
       @quests = @quests.tagged_with(params[:tag]).where(adventurer: nil)
@@ -37,7 +37,7 @@ class QuestsController < ApplicationController
   # GET /quests/1/edit
   def edit
   end
-  
+
   # POST /quests/accept
   def accept
     Pending.delete_all(quest_id: @quest.id)
