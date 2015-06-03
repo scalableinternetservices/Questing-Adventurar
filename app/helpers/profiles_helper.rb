@@ -7,4 +7,8 @@ module ProfilesHelper
  		"quest-#{quest.id}-#{quest.updated_at}"
  	end
 
+ 	 def cache_key_for_pending_quest_row(pending)
+ 		"pending-#{pending.id}"
+ 	end
+
 end
